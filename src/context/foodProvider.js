@@ -1,4 +1,5 @@
 import React, { createContext } from 'react';
+import PropTypes from 'prop-types';
 
 export const FoodContext = createContext();
 
@@ -7,3 +8,7 @@ function FoodProvider({ children }) {
 }
 
 export default FoodProvider;
+
+FoodProvider.propTypes = {
+  children: PropTypes.node.isRequired,
+};

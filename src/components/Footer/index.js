@@ -5,7 +5,6 @@ function Footer() {
   return (
     <div>
       <ComponenteTeste />
-      <ComponenteTeste2 />
     </div>
   );
 }
