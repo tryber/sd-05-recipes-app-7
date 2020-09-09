@@ -21,9 +21,9 @@ const Foods = () => {
       {foods.map((food, index) => {
         if (index < 12) {
           return (
-            <div key={food.idMeal}>
-              <h3>{food.strMeal}</h3>
-              <img src={food.strMealThumb} alt="Meal" />
+            <div key={food.idMeal} data-testid={`${index}-recipe-card`}>
+              <h3 data-testid={`${index}-card-name`}>{food.strMeal}</h3>
+              <img src={food.strMealThumb} alt="Meal" data-testid={`${index}-card-img`} />
             </div>
           );
         }
