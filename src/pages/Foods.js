@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import ComponentHeader from '../components/Header/ComponenteHeader';
 import fetchFoods from '../services/fetchFoods';
 import Footer from '../components/Footer';
+import PageTitle from '../components/Header/PageTitle';
 
 const Foods = () => {
   const [loading, setLoading] = useState(true);
@@ -18,7 +19,7 @@ const Foods = () => {
   ) : (
     <section>
       <ComponentHeader />
-      <h1>Comidas</h1>
+      <PageTitle title={'Comidas'} />
       {foods.map((food, index) => {
         if (index < 12) {
           return (

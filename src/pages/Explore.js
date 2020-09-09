@@ -1,10 +1,12 @@
 import React from 'react';
+
 import Footer from '../components/Footer';
+import PageTitle from '../components/Header/PageTitle';
 
 function Explore() {
   return (
     <div>
-      <h1>Explorar</h1>
+      <PageTitle title={'Explorar'} />
       <Footer />
     </div>
   );
