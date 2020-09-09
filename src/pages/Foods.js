@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
+
 import fetchFoods from '../services/fetchFoods';
+import Footer from '../components/Footer';
 
 const Foods = () => {
   const [loading, setLoading] = useState(true);
@@ -27,6 +29,7 @@ const Foods = () => {
         }
         return null;
       })}
+      <Footer />
     </section>
   );
 };
