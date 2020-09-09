@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
+import ComponentHeader from '../components/Header/ComponenteHeader';
 import fetchFoods from '../services/fetchFoods';
 
 const Foods = () => {
@@ -15,6 +15,7 @@ const Foods = () => {
     <section>Loading...</section>
   ) : (
     <section>
+      <ComponentHeader />
       <h1>Comidas</h1>
       {foods.map((food, index) => {
         if (index < 12) {
