@@ -10,9 +10,9 @@ function App() {
   return (
     <BrowserRouter>
       <Route exact path="/" component={Login} />
-      <Route exact path="/comidas" component={Foods} />
-      <Route exact path="/bebidas" component={Drinks} />
-      <Route exact path="/explorar" component={Explore} />
+      <Route path="/comidas" component={Foods} />
+      <Route path="/bebidas" component={Drinks} />
+      <Route path="/explorar" component={Explore} />
     </BrowserRouter>
   );
 }
