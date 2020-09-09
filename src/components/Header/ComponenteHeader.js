@@ -18,7 +18,7 @@ function ComponenteHeader() {
       <Link to="/perfil">
         <input type="image" src={profileIcon} alt="profile" data-testid="profile-top-btn" />
       </Link>
-      <h2 data-testid="page-title">COMIDAS</h2>
+      <h2 data-testid="page-title">Comidas</h2>
       <input type="image" src={searchIcon} alt="search" data-testid="search-top-btn" onClick={() => setSearchActive(!searchActive)} />
       <form hidden={searchActive}>
         <input type="text" placeholder="Buscar Receitas" onChange={handleChange} data-testid="search-input" value={searchText} />

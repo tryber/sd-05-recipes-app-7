@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
+
 import ComponentHeader from '../components/Header/ComponenteHeader';
 import fetchFoods from '../services/fetchFoods';
+import Footer from '../components/Footer';
 
 const Foods = () => {
   const [loading, setLoading] = useState(true);
@@ -20,14 +22,15 @@ const Foods = () => {
       {foods.map((food, index) => {
         if (index < 12) {
           return (
-            <div key={food.idMeal}>
-              <h3>{food.strMeal}</h3>
-              <img src={food.strMealThumb} alt="Meal" />
+            <div key={food.idMeal} data-testid={`${index}-recipe-card`}>
+              <h3 data-testid={`${index}-card-name`}>{food.strMeal}</h3>
+              <img src={food.strMealThumb} alt="Meal" data-testid={`${index}-card-img`} />
             </div>
           );
         }
         return null;
       })}
+      <Footer />
     </section>
   );
 };
