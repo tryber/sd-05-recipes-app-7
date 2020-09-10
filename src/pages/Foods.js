@@ -4,6 +4,7 @@ import ComponentHeader from '../components/Header/ComponenteHeader';
 import fetchFoods from '../services/fetchFoods';
 import Footer from '../components/Footer';
 import PageTitle from '../components/Header/PageTitle';
+import FoodCard from '../components/Cards/FoodCard'
 
 const Foods = () => {
   const [loading, setLoading] = useState(true);
@@ -23,10 +24,7 @@ const Foods = () => {
       {foods.map((food, index) => {
         if (index < 12) {
           return (
-            <div key={food.idMeal} data-testid={`${index}-recipe-card`}>
-              <h3 data-testid={`${index}-card-name`}>{food.strMeal}</h3>
-              <img src={food.strMealThumb} alt="Meal" data-testid={`${index}-card-img`} />
-            </div>
+            <FoodCard food={food} index={index} />
           );
         }
         return null;
