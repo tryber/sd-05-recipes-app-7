@@ -12,7 +12,7 @@ const Foods = () => {
     fetchFoods().then((data) => {
       setFoods(data);
       setLoading(false);
-    })
+    });
   }, []);
 
   return loading ? (

@@ -1,6 +1,12 @@
 import React from 'react';
 import SearchLessHeader from '../components/Header/SearchlessHeader';
+import Footer from '../components/Footer';
 
-const ExploreFoods = () => <SearchLessHeader title={'Explorar Comidas'} />;
+const ExploreFoods = () => (
+  <div>
+    <SearchLessHeader title={'Explorar Comidas'} />
+    <Footer />
+  </div>
+);
 
 export default ExploreFoods;
