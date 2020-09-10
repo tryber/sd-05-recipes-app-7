@@ -1,39 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import fetchDrinks from '../../services/fetchDrinks';
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
-const Drinks = () => {
-  const [loading, setLoading] = useState(true);
-  const [drinks, setDrinks] = useState([]);
-
-  useEffect(() => {
-    fetchDrinks().then((data) => {
-      setDrinks(data);
-      setLoading(false);
-    });
-  }, []);
-
-  return loading ? (
-    <section>Loading...</section>
-  ) : (
-    <section>
-      {drinks.map((drink, index) => {
-        if (index < 12) {
-          return (
-            <div key={drink.idDrink} data-testid={`${index}-recipe-card`}>
-              <h3 data-testId={`${index}-card-name`}>{drink.strDrink}</h3>
-              <img
-                src={drink.strDrinkThumb}
-                alt="Drink"
-                data-testid={`${index}-card-img`}
-              />
-              {console.log(drink)}
-            </div>
-          );
-        }
-        return null;
-      })}
-    </section>
+const DrinkCard = ({ drink, index }) => {
+  return (
+    <Link to={`/bebidas/${drink.idDrink}`}>
+      <div key={drink.idDrink} data-testid={`${index}-recipe-card`}>
+        <h3 data-testId={`${index}-card-name`}>{drink.strDrink}</h3>
+        <img src={drink.strDrinkThumb} alt="Drink" data-testid={`${index}-card-img`} />
+      </div>
+    </Link>
   );
 };
 
-export default Drinks;
+export default DrinkCard;
+
+DrinkCard.propTypes = {
+  drink: PropTypes.instanceOf(Object).isRequired,
+  index: PropTypes.number.isRequired,
+};
