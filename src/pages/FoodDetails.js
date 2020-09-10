@@ -1,5 +1,11 @@
-import React from 'react';
+import React from 'react'
 
-const FoodDetails = () => <h1>Page</h1>;
+function FoodDetails() {
+  return (
+    <div>
+      <h1>DETALHES</h1>
+    </div>
+  )
+}
 
-export default FoodDetails;
+export default FoodDetails
