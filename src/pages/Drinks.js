@@ -1,12 +1,14 @@
 import React from 'react';
 
 import Footer from '../components/Footer';
-import Header from '../components/Header/Header';
+import PageTitle from '../components/Header/PageTitle';
+import DrinkCard from '../components/Cards.js/DrinkCard';
 
 function Drinks() {
   return (
     <div>
-      <Header title={'Bebidas'} />
+      <PageTitle title={'Bebidas'} />
+      <DrinkCard />
       <Footer />
     </div>
   );
