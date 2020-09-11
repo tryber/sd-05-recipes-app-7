@@ -1,17 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import { fetchDrinks } from '../services/fetchDrinks';
+import React, { useEffect, useContext } from 'react';
+
+import Footer from '../components/Footer';
 import DrinkCard from '../components/Cards/DrinkCard';
 import Header from '../components/Header/Header';
-import Footer from '../components/Footer';
+import DrinkContext from '../context/DrinkContext';
+import { fetchDrinks } from '../services/fetchDrinks';
 
 const Drinks = () => {
-  const [loading, setLoading] = useState(true);
-  const [drinks, setDrinks] = useState([]);
+  const { loading, drinks, toggleLoading, requestDrinks } = useContext(DrinkContext);
 
   useEffect(() => {
     fetchDrinks().then((data) => {
-      setDrinks(data);
-      setLoading(false);
+      requestDrinks(data);
+      toggleLoading();
     });
   }, []);
 
