@@ -1,12 +1,12 @@
 import React from 'react';
 
 import Footer from '../components/Footer';
-import PageTitle from '../components/Header/PageTitle';
+import SearchlessHeader from '../components/Header/SearchlessHeader';
 
 function Explore() {
   return (
     <div>
-      <PageTitle title={'Explorar'} />
+      <SearchlessHeader title={'Explorar'} />
       <Footer />
     </div>
   );

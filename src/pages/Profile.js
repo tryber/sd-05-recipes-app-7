@@ -1,12 +1,11 @@
 import React from 'react';
-import ComponenteHeader from '../components/Header/ComponenteHeader';
 import Footer from '../components/Footer';
+import SearchlessHeader from '../components/Header/SearchlessHeader';
 
 function Profile() {
   return (
     <div>
-      <ComponenteHeader />
-      <h2 data-testid="page-title">Perfil</h2>
+      <SearchlessHeader title={'Perfil'} />
       <Footer />
     </div>
   );
