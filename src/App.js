@@ -7,6 +7,7 @@ import Foods from './pages/Foods';
 import Drinks from './pages/Drinks';
 import Explore from './pages/Explore';
 import Profile from './pages/Profile';
+import DrinkDetails from './pages/DrinkDetails';
 
 
 function App() {
@@ -14,9 +15,10 @@ function App() {
     <BrowserRouter>
       <Route exact path="/" component={Login} />
       <Route path="/comidas" component={Foods} />
-      <Route path="/bebidas" component={Drinks} />
+      <Route exact path="/bebidas" component={Drinks} />
       <Route path="/explorar" component={Explore} />
       <Route path="/perfil" component={Profile} />
+      <Route path="/bebidas/:id" component={DrinkDetails} />
     </BrowserRouter>
   );
 }
