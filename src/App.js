@@ -19,21 +19,7 @@ import ExploreFoodsByIngredient from './pages/ExploreFoodsByIngredient';
 import ExploreDrinksByIngredient from './pages/ExploreDrinksByIngredient';
 import ExploreFoodsByLocal from './pages/ExploreFoodsByLocal';
 import Profile from './pages/Profile';
-<<<<<<< HEAD
-import DrinkDetails from './pages/DrinkDetails';
 
-
-function App() {
-  return (
-    <BrowserRouter>
-      <Route exact path="/" component={Login} />
-      <Route path="/comidas" component={Foods} />
-      <Route exact path="/bebidas" component={Drinks} />
-      <Route path="/explorar" component={Explore} />
-      <Route path="/perfil" component={Profile} />
-      <Route path="/bebidas/:id" component={DrinkDetails} />
-    </BrowserRouter>
-=======
 import FavoriteRecipes from './pages/FavoriteRecipes';
 import RecipesDone from './pages/RecipesDone';
 
@@ -59,7 +45,6 @@ function App() {
         <Route path="/receitas-favoritas" component={FavoriteRecipes} />
       </BrowserRouter>
     </HeaderProvider>
->>>>>>> master
   );
 }
 
