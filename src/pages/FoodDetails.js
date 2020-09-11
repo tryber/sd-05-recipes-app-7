@@ -21,9 +21,14 @@ function FoodDetails() {
       <h3 data-testid="recipe-category">{food.strCategory}</h3>
       <h2>Ingredients</h2>
       <ul>
-        <li>{`${food.strIngredient1} - ${food.strMeasure1}`}</li>
+        {Object.keys(food).map((ingredient) => {
+          return (
+            console.log(ingredient, food[ingredient])
+          )
+        })}
+        {/* <li>{`${food.strIngredient1} - ${food.strMeasure1}`}</li>
         <li>{`${food.strIngredient2} - ${food.strMeasure2}`}</li>
-        <li>{`${food.strIngredient3} - ${food.strMeasure3}`}</li>
+        <li>{`${food.strIngredient3} - ${food.strMeasure3}`}</li> */}
       </ul>
       <h2>Instructions</h2>
       <p>{food.strInstructions}</p>

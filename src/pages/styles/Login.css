@@ -1,0 +1,38 @@
+.login-container {
+  background-image: linear-gradient(to bottom, white, whitesmoke);
+  height: 95vh;
+  padding: 30px;
+  position: relative;
+}
+
+.login-input {
+  left: 50%;
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.login-input-email, .login-input-password {
+  border-radius: 10px;
+  display: block;
+  margin: 15px 15px;
+  padding: 10px;
+  width: 30vw;
+}
+
+.btn:disabled {
+  background-color: green;
+  padding: 45px;
+  border-radius: 10px;
+  background-color: grey;
+  padding: 15px;
+}
+
+.btn {
+  background-image: linear-gradient(to right bottom, rgb(240, 112, 8), rgb(251, 146, 60));
+  padding: 45px;
+  border-radius: 10px;
+  background-color: grey;
+  padding: 15px;
+}

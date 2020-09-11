@@ -21,7 +21,7 @@ const Drinks = () => {
   ) : (
     <section>
       <Header title={'Bebidas'} />
-      {drinks.map((drink, index) => {
+      {drinks && drinks.map((drink, index) => {
         if (index < 12) {
           return <DrinkCard drink={drink} index={index} />;
         }
