@@ -68,7 +68,3 @@ const DrinkDetails = (props) => {
 };
 
 export default DrinkDetails;
-
-DrinkDetails.propTypes = {
-  match: PropTypes.Object.isRequired,
-};
