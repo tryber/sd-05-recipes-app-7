@@ -12,6 +12,9 @@ function FoodDetails() {
       .then((data) => setFood(data.meals[0]));
   }, []);
 
+  // https://stackoverflow.com/questions/51976152/refused-to-display-https-www-youtube-com-watchv-okzrsbjqjos-in-a-frame-beca
+  const youtubeURL = () => String(food.strYoutube).replace('watch?v=', 'embed/');
+
   // https://medium.com/@vmarchesin/using-array-prototype-reduce-in-objects-using-javascript-dfcdae538fc8
   const filterIngredients = () =>
     Object.keys(food)
@@ -45,7 +48,7 @@ function FoodDetails() {
       <h2>Instructions</h2>
       <p>{food.strInstructions}</p>
       <h2>Video</h2>
-      <iframe width="420" height="315" src={food.strYoutube} />
+      <iframe width="420" height="315" src={youtubeURL()} />
     </div>
   );
 }
