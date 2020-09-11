@@ -41,10 +41,9 @@ function FoodDetails() {
       <h3 data-testid="recipe-category">{food.strCategory}</h3>
       <h2>Ingredients</h2>
       <ul>
-        {Object.entries(filterIngredients()).map((key) => (
-          key[1] === null ? <li>{key[0]}</li> :
-          <li>{`${key[0]} - ${key[1]}`}</li>
-        ))}
+        {Object.entries(filterIngredients()).map((key) =>
+          (key[1] === null ? <li>{key[0]}</li> : <li>{`${key[0]} - ${key[1]}`}</li>),
+        )}
       </ul>
       <h2>Instructions</h2>
       <p>{food.strInstructions}</p>

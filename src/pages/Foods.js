@@ -21,7 +21,7 @@ const Foods = () => {
   ) : (
     <section>
       <Header title={'Comidas'} />
-      {foods.map((food, index) => {
+      {foods && foods.map((food, index) => {
         if (index < 12) {
           return <FoodCard food={food} index={index} />;
         }
