@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 
-import fetchFoods from '../services/fetchFoods';
 import Footer from '../components/Footer';
 import FoodCard from '../components/Cards/FoodCard';
 import Header from '../components/Header/Header';
+import FoodContext from '../context/FoodContext';
+import fetchFoods from '../services/fetchFoods';
 
 const Foods = () => {
-  const [loading, setLoading] = useState(true);
-  const [foods, setFoods] = useState([]);
+  const { loading, foods, toggleLoading, requestFoods } = useContext(FoodContext);
 
   useEffect(() => {
     fetchFoods().then((data) => {
-      setFoods(data);
-      setLoading(false);
+      requestFoods(data);
+      toggleLoading();
     });
   }, []);
 
@@ -21,12 +21,13 @@ const Foods = () => {
   ) : (
     <section>
       <Header title={'Comidas'} />
-      {foods.map((food, index) => {
-        if (index < 12) {
-          return <FoodCard food={food} index={index} />;
-        }
-        return null;
-      })}
+      {foods &&
+        foods.map((food, index) => {
+          if (index < 12) {
+            return <FoodCard food={food} index={index} />;
+          }
+          return null;
+        })}
       <Footer />
     </section>
   );
