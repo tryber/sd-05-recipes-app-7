@@ -12,6 +12,23 @@ function FoodDetails() {
       .then((data) => setFood(data.meals[0]));
   }, []);
 
+  // https://medium.com/@vmarchesin/using-array-prototype-reduce-in-objects-using-javascript-dfcdae538fc8
+  const filterIngredients = () =>
+    Object.keys(food)
+      .filter((key) => key.includes('Ingredient') && food[key] !== '' && food[key] !== null)
+      .reduce((object, key) => {
+        if (key.length === 14) {
+          return {
+            ...object,
+            [food[key]]: food[`strMeasure${key[key.length - 1]}`],
+          };
+        }
+        return {
+          ...object,
+          [food[key]]: food[`strMeasure${key[key.length - 2]}${key[key.length - 1]}`],
+        };
+      }, {});
+
   return (
     <div>
       <img src={food.strMealThumb} alt="Meal" data-testid="recipe-photo" />
@@ -21,9 +38,9 @@ function FoodDetails() {
       <h3 data-testid="recipe-category">{food.strCategory}</h3>
       <h2>Ingredients</h2>
       <ul>
-        <li>{`${food.strIngredient1} - ${food.strMeasure1}`}</li>
-        <li>{`${food.strIngredient2} - ${food.strMeasure2}`}</li>
-        <li>{`${food.strIngredient3} - ${food.strMeasure3}`}</li>
+        {Object.entries(filterIngredients()).map((key) => (
+          <li>{`${key[0]} - ${key[1]}`}</li>
+        ))}
       </ul>
       <h2>Instructions</h2>
       <p>{food.strInstructions}</p>
