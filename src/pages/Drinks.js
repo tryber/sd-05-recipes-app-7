@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 
 import fetchDrinks from '../services/fetchDrinks';
+import DrinkCard from '../components/Cards/DrinkCard';
 import Header from '../components/Header/Header';
-import DrinkCard from '../components/Cards.js/DrinkCard';
+import Footer from '../components/Footer';
 
 const Drinks = () => {
   const [loading, setLoading] = useState(true);
@@ -26,6 +27,7 @@ const Drinks = () => {
         }
         return null;
       })}
+      <Footer />
     </section>
   );
 };
