@@ -1,15 +1,35 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
+import fetchDrinks from '../services/fetchDrinks';
+import DrinkCard from '../components/Cards/DrinkCard';
+import Header from '../components/Header/Header';
 import Footer from '../components/Footer';
-import PageTitle from '../components/Header/PageTitle';
 
-function Drinks() {
-  return (
-    <div>
-      <PageTitle title={'Bebidas'} />
+const Drinks = () => {
+  const [loading, setLoading] = useState(true);
+  const [drinks, setDrinks] = useState([]);
+
+  useEffect(() => {
+    fetchDrinks().then((data) => {
+      setDrinks(data);
+      setLoading(false);
+    });
+  }, []);
+
+  return loading ? (
+    <section>Loading...</section>
+  ) : (
+    <section>
+      <Header title={'Bebidas'} />
+      {drinks.map((drink, index) => {
+        if (index < 12) {
+          return <DrinkCard drink={drink} index={index} />;
+        }
+        return null;
+      })}
       <Footer />
-    </div>
+    </section>
   );
-}
+};
 
 export default Drinks;
