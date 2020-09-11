@@ -42,6 +42,7 @@ function FoodDetails() {
       <h2>Ingredients</h2>
       <ul>
         {Object.entries(filterIngredients()).map((key) => (
+          key[1] === null ? <li>{key[0]}</li> :
           <li>{`${key[0]} - ${key[1]}`}</li>
         ))}
       </ul>
