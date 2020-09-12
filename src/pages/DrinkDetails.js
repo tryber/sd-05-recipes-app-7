@@ -5,7 +5,7 @@ import { fetchDrinkId } from '../services/fetchDrinks';
 import IngredientList from '../components/DetailsPage/IngredientList';
 import FoodCarousel from '../components/DetailsPage/FoodCarousel';
 
-const DrinkDetails = (props) => {
+function DrinkDetails(props) {
   const { id } = props.match.params;
   const [singleDrink, setSingleDrink] = useState({});
   const [loading, setLoading] = useState(true);
