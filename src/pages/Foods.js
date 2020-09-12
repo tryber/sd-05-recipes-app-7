@@ -7,6 +7,12 @@ import Header from '../components/Header/Header';
 import FoodContext from '../context/FoodContext';
 import fetchFoods from '../services/fetchFoods';
 
+function Alert(array) {
+  return array === null
+    ? alert('Sinto muito, não encontramos nenhuma receita para esses filtros.')
+    : null;
+}
+
 const Foods = () => {
   const { foods, requestFoods } = useContext(FoodContext);
   const [loading, setLoading] = useState(true);
@@ -23,9 +29,7 @@ const Foods = () => {
   ) : (
     <section>
       <Header title={'Comidas'} />
-      {foods === null
-        ? alert('Sinto muito, não encontramos nenhuma receita para esses filtros.')
-        : null}
+      {Alert(foods)}
       {foods && foods.length === 1 ? <Redirect to={`/comidas/${foods[0].idMeal}`} /> : null}
       {foods &&
         foods.map((food, index) => {
