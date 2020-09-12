@@ -21,7 +21,6 @@ const Foods = () => {
     <section>Loading...</section>
   ) : (
     <section>
-      {console.log('console teste', foods)}
       <Header title={'Comidas'} />
       {foods === null
         ? alert('Sinto muito, não encontramos nenhuma receita para esses filtros.')

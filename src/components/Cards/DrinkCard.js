@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const DrinkCard = ({ drink, index }) => (
   <Link to={`/bebidas/${drink.idDrink}`}>
     <div key={drink.idDrink} data-testid={`${index}-recipe-card`}>
-      <h3 data-testId={`${index}-card-name`}>{drink.strDrink}</h3>
+      <h3 data-testid={`${index}-card-name`}>{drink.strDrink}</h3>
       <img src={drink.strDrinkThumb} alt="Drink" data-testid={`${index}-card-img`} />
     </div>
   </Link>
