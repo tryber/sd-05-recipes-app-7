@@ -37,7 +37,7 @@ function DrinkDetails(props) {
         <iframe width="420" height="315" src={youtubeURL()} data-testid="video" />
       ) : null}
       <FoodCarousel />
-      <button data-testid="start-recipe-btn">START</button>
+      <button data-testid="start-recipe-btn">Iniciar Receita</button>
     </div>
   );
 }
