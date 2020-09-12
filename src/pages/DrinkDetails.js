@@ -40,7 +40,7 @@ function DrinkDetails(props) {
       <button data-testid="start-recipe-btn">START</button>
     </div>
   );
-};
+}
 
 export default DrinkDetails;
 
