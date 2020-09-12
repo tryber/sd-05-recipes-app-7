@@ -5,10 +5,7 @@ import DrinkContext from '../DrinkContext';
 function DrinkProvider({ children }) {
   const [searchText, setSearchText] = useState('');
   const [selectedFilter, setSelectedFilter] = useState('');
-  const [loading, setLoading] = useState(true);
   const [drinks, setDrinks] = useState([]);
-
-  const toggleLoading = () => setLoading(!loading);
 
   const requestDrinks = (data) => setDrinks(data);
 
@@ -17,8 +14,6 @@ function DrinkProvider({ children }) {
   const updateSelectedFilter = (event) => setSelectedFilter(event.target.value);
 
   const contextValue = {
-    loading,
-    toggleLoading,
     drinks,
     requestDrinks,
     searchText,

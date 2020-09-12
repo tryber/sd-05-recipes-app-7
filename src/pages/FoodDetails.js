@@ -47,11 +47,17 @@ function FoodDetails(props) {
       <h3 data-testid="recipe-category">{singleFood.strCategory}</h3>
       <ul>
         {Object.entries(filterIngredients()).map((key, index) =>
-          (key[1] === null ? <li data-testid={`${index}-ingredient-name-and-measure`}>{key[0]}</li> : <li>{`${key[0]} - ${key[1]}`}</li>),
+          key[1] === null ? (
+            <li data-testid={`${index}-ingredient-name-and-measure`}>{key[0]}</li>
+          ) : (
+            <li data-testid={`${index}-ingredient-name-and-measure`}>{`${key[0]} - ${key[1]}`}</li>
+          ),
         )}
       </ul>
       <p data-testid="instructions">{singleFood.strInstructions}</p>
-      {singleFood.strYoutube ? <iframe width="420" height="315" src={youtubeURL()} /> : null}
+      {singleFood.strYoutube ? (
+        <iframe width="420" height="315" src={youtubeURL()} data-testid="video" />
+      ) : null}
     </div>
   );
 }

@@ -2,7 +2,7 @@
 export default function fetchDrinks(text = '', type = '') {
   let api = '';
   if (type === 'ingredient') {
-    api = `https://www.thecocktaildb.com/api/json/v1/1/search.php?i=${text}`;
+    api = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${text}`;
   } else if (type === 'firstLetter') {
     api = `https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${text}`;
   } else {
@@ -17,7 +17,7 @@ export default function fetchDrinks(text = '', type = '') {
 export function fetchDrinkId(id) {
   return fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`)
     .then((response) => response.json())
-    .then((data) => data.drinks)
+    .then((data) => data.drinks[0])
     .catch((error) => console.error(error));
 }
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 
 import Footer from '../components/Footer';
@@ -8,12 +8,13 @@ import FoodContext from '../context/FoodContext';
 import fetchFoods from '../services/fetchFoods';
 
 const Foods = () => {
-  const { loading, foods, toggleLoading, requestFoods } = useContext(FoodContext);
+  const { foods, requestFoods } = useContext(FoodContext);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetchFoods().then((data) => {
       requestFoods(data);
-      toggleLoading();
+      setLoading(false);
     });
   }, []);
 

@@ -21,14 +21,13 @@ import ExploreFoodsByIngredient from './pages/ExploreFoodsByIngredient';
 import ExploreDrinksByIngredient from './pages/ExploreDrinksByIngredient';
 import ExploreFoodsByLocal from './pages/ExploreFoodsByLocal';
 import Profile from './pages/Profile';
-
 import FavoriteRecipes from './pages/FavoriteRecipes';
 import RecipesDone from './pages/RecipesDone';
 
 function App() {
   return (
-    <DrinkProvider>
-      <FoodProvider>
+    <FoodProvider>
+      <DrinkProvider>
         <HeaderProvider>
           <BrowserRouter>
             <Switch>
@@ -51,8 +50,8 @@ function App() {
             </Switch>
           </BrowserRouter>
         </HeaderProvider>
-      </FoodProvider>
-    </DrinkProvider>
+      </DrinkProvider>
+    </FoodProvider>
   );
 }
 

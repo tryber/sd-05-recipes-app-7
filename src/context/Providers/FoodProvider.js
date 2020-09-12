@@ -5,10 +5,7 @@ import FoodContext from '../FoodContext';
 function FoodProvider({ children }) {
   const [searchText, setSearchText] = useState('');
   const [selectedFilter, setSelectedFilter] = useState('');
-  const [loading, setLoading] = useState(true);
   const [foods, setFoods] = useState([]);
-
-  const toggleLoading = () => setLoading(!loading);
 
   const requestFoods = (data) => setFoods(data);
 
@@ -17,8 +14,6 @@ function FoodProvider({ children }) {
   const updateSelectedFilter = (event) => setSelectedFilter(event.target.value);
 
   const contextValue = {
-    loading,
-    toggleLoading,
     foods,
     requestFoods,
     searchText,

@@ -1,17 +1,29 @@
 import React, { useContext } from 'react';
-import FoodContext from '../../context/FoodContext';
-import fetchFoods from '../../services/fetchFoods';
 
+import fetchFoods from '../../services/fetchFoods';
+import fetchDrinks from '../../services/fetchDrinks';
+import FoodContext from '../../context/FoodContext';
+import DrinkContext from '../../context/DrinkContext';
 
 function SearchBar() {
   const { updateSearchText, updateSelectedFilter, searchText, selectedFilter, requestFoods,
   } = useContext(FoodContext);
 
-  const sendFilterFoodRequest = (text, filter) => {
+  const { requestDrinks } = useContext(DrinkContext);
+
+  const filterFoods = (text, filter) => {
     if (filter === 'firstLetter' && text.length > 1) {
       alert('Sua busca deve conter somente 1 (um) caracter');
     } else {
       fetchFoods(text, filter).then((data) => requestFoods(data));
+    }
+  };
+
+  const filterDrinks = (text, filter) => {
+    if (filter === 'firstLetter' && text.length > 1) {
+      alert('Sua busca deve conter somente 1 (um) caracter');
+    } else {
+      fetchDrinks(text, filter).then((data) => requestDrinks(data));
     }
   };
 
@@ -42,7 +54,9 @@ function SearchBar() {
       <label htmlFor="letra">Primeira Letra</label>
       <button
         type="button" data-testid="exec-search-btn"
-        onClick={() => sendFilterFoodRequest(searchText, selectedFilter)}
+        onClick={() => {
+          filterFoods(searchText, selectedFilter); filterDrinks(searchText, selectedFilter);
+        }}
       >
         Buscar
       </button>

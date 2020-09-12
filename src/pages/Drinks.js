@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 
 import Footer from '../components/Footer';
@@ -8,12 +8,13 @@ import DrinkContext from '../context/DrinkContext';
 import fetchDrinks from '../services/fetchDrinks';
 
 const Drinks = () => {
-  const { loading, drinks, toggleLoading, requestDrinks } = useContext(DrinkContext);
+  const { drinks, requestDrinks } = useContext(DrinkContext);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetchDrinks().then((data) => {
       requestDrinks(data);
-      toggleLoading();
+      setLoading(false);
     });
   }, []);
 
