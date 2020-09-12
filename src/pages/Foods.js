@@ -1,4 +1,5 @@
 import React, { useEffect, useContext } from 'react';
+import { Redirect } from 'react-router-dom';
 
 import Footer from '../components/Footer';
 import FoodCard from '../components/Cards/FoodCard';
@@ -21,6 +22,10 @@ const Foods = () => {
   ) : (
     <section>
       <Header title={'Comidas'} />
+      {foods === null
+        ? alert('Sinto muito, não encontramos nenhuma receita para esses filtros.')
+        : null}
+      {foods && foods.length === 1 ? <Redirect to={`/comidas/${foods[0].idMeal}`} /> : null}
       {foods &&
         foods.map((food, index) => {
           if (index < 12) {
