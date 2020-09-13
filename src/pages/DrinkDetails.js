@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import './styles/RecipeDetails.css';
 
 import { fetchDrinkId } from '../services/fetchDrinks';
-import IngredientList from '../components/DetailsPage/IngredientList';
-import FoodCarousel from '../components/DetailsPage/FoodCarousel';
+import IngredientList from '../components/RecipeDetails/IngredientList';
+import FoodCarousel from '../components/RecipeDetails/FoodCarousel';
 
 function DrinkDetails(props) {
   const { id } = props.match.params;
@@ -37,7 +38,7 @@ function DrinkDetails(props) {
         <iframe width="420" height="315" src={youtubeURL()} data-testid="video" />
       ) : null}
       <FoodCarousel />
-      <button data-testid="start-recipe-btn">Iniciar Receita</button>
+      <button data-testid="start-recipe-btn" className="btn-recipe">Iniciar Receita</button>
     </div>
   );
 }
