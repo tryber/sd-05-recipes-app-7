@@ -5,6 +5,7 @@ import './styles/RecipeDetails.css';
 import { fetchFoodId } from '../services/fetchFoods';
 import IngredientList from '../components/RecipeDetails/IngredientList';
 import DrinkCarousel from '../components/RecipeDetails/DrinkCarousel';
+import ShareButton from '../components/RecipeDetails/ShareButton';
 
 function FoodDetails(props) {
   const { id } = props.match.params;
@@ -26,7 +27,7 @@ function FoodDetails(props) {
   ) : (
     <div>
       <img src={singleFood.strMealThumb} alt="Meal" data-testid="recipe-photo" />
-      <button data-testid="share-btn">Share</button>
+      <ShareButton url={props}/>
       <button data-testid="favorite-btn">Favorite</button>
       <h1 data-testid="recipe-title">{singleFood.strMeal}</h1>
       <h3 data-testid="recipe-category">{singleFood.strCategory}</h3>
