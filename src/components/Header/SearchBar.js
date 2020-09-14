@@ -1,43 +1,38 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
+
+import fetchFoods from '../../services/fetchFoods';
+import fetchDrinks from '../../services/fetchDrinks';
+import FoodContext from '../../context/FoodContext';
+import DrinkContext from '../../context/DrinkContext';
+import SearchForm from './SearchForm';
+
+const filterRecipes = (text, filter, fetch, request) => {
+  if (filter === 'firstLetter' && text.length > 1) {
+    alert('Sua busca deve conter somente 1 (um) caracter');
+  } else {
+    fetch(text, filter).then((data) => request(data));
+  }
+};
 
 function SearchBar() {
-  const [searchText, setSearchText] = useState('');
+  const { requestFoods, searchText, selectedFilter } = useContext(FoodContext);
 
-  function handleChange(event) {
-    setSearchText(event.target.value);
-  }
+  const { requestDrinks } = useContext(DrinkContext);
 
   return (
-    <form>
-      <input
-        type="text"
-        placeholder="Buscar Receitas"
-        onChange={(event) => handleChange(event)}
-        data-testid="search-input"
-        value={searchText}
-      />
-      <input
-        type="radio"
-        name="pesquisar"
-        id="ingredientes"
-        data-testid="ingredient-search-radio"
-        value=""
-      />
-      <label htmlFor="ingredientes">Ingredientes</label>
-      <input type="radio" name="pesquisar" id="nome" data-testid="name-search-radio" value="" />
-      <label htmlFor="nome">Nome</label>
-      <input
-        type="radio"
-        name="pesquisar"
-        id="letra"
-        data-testid="first-letter-search-radio"
-        value=""
-      />
-      <label htmlFor="letra">Primeira Letra</label>
-      <button type="button" data-testid="exec-search-btn">
+    <section>
+      <SearchForm />
+      <button
+        type="button"
+        data-testid="exec-search-btn"
+        onClick={() => {
+          filterRecipes(searchText, selectedFilter, fetchFoods, requestFoods);
+          filterRecipes(searchText, selectedFilter, fetchDrinks, requestDrinks);
+        }}
+      >
         Buscar
       </button>
-    </form>
+    </section>
   );
 }
 

@@ -1,0 +1,15 @@
+.carousel {
+  display: flex;
+  overflow-x: scroll;
+  width: 50%;
+}
+
+.carousel-item {
+  width: 25vw;
+}
+
+.carousel img {
+  border: solid 10px black;
+  margin-right: 10px;
+  max-height: 200px;
+}

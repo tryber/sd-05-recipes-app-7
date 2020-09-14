@@ -1,36 +1,53 @@
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
+import './styles/RecipeDetails.css';
 
-// IMPORTANTE: Somente uma organização básica da página,
-// sem as funções necessárias para mapear os valores
-function FoodDetails() {
-  const [food, setFood] = useState({});
+import { fetchFoodId } from '../services/fetchFoods';
+import IngredientList from '../components/RecipeDetails/IngredientList';
+import DrinkCarousel from '../components/RecipeDetails/DrinkCarousel';
+import ShareButton from '../components/RecipeDetails/ShareButton';
+import FavoriteButton from '../components/RecipeDetails/FavoriteButton';
+import StartRecipeButton from '../components/RecipeDetails/StartRecipeButton';
 
-  // Escrever novo "fetch" com id apropriada, abaixo somente o exemplo da API
+function FoodDetails(props) {
+  const { id } = props.match.params;
+  const [singleFood, setSingleFood] = useState({});
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
-    fetch('https://www.themealdb.com/api/json/v1/1/lookup.php?i=52772')
-      .then((response) => response.json())
-      .then((data) => setFood(data.meals[0]));
+    fetchFoodId(id).then((data) => {
+      setSingleFood(data);
+      setLoading(false);
+    });
   }, []);
 
-  return (
+  // https://stackoverflow.com/questions/51976152/refused-to-display-https-www-youtube-com-watchv-okzrsbjqjos-in-a-frame-beca
+  const youtubeURL = () => String(singleFood.strYoutube).replace('watch?v=', 'embed/');
+
+  return loading && !singleFood ? (
+    <section>Loading...</section>
+  ) : (
     <div>
-      <img src={food.strMealThumb} alt="Meal" data-testid="recipe-photo" />
-      <button data-testid="share-btn">Share</button>
-      <button data-testid="favorite-btn">Favorite</button>
-      <h1 data-testid="recipe-title">{food.strMeal}</h1>
-      <h3 data-testid="recipe-category">{food.strCategory}</h3>
-      <h2>Ingredients</h2>
-      <ul>
-        <li>{`${food.strIngredient1} - ${food.strMeasure1}`}</li>
-        <li>{`${food.strIngredient2} - ${food.strMeasure2}`}</li>
-        <li>{`${food.strIngredient3} - ${food.strMeasure3}`}</li>
-      </ul>
-      <h2>Instructions</h2>
-      <p>{food.strInstructions}</p>
-      <h2>Video</h2>
-      <iframe width="420" height="315" src={food.strYoutube} />
+      <img src={singleFood.strMealThumb} alt="Meal" data-testid="recipe-photo" />
+      <ShareButton url={props} />
+      <FavoriteButton recipe={singleFood} />
+      <h1 data-testid="recipe-title">{singleFood.strMeal}</h1>
+      <h3 data-testid="recipe-category">{singleFood.strCategory}</h3>
+      <IngredientList singleItem={singleFood} />
+      <p data-testid="instructions">{singleFood.strInstructions}</p>
+      {singleFood.strYoutube ? (
+        <iframe width="420" height="315" src={youtubeURL()} data-testid="video" />
+      ) : null}
+      <DrinkCarousel />
+      <StartRecipeButton url={props} />
     </div>
   );
 }
 
 export default FoodDetails;
+
+FoodDetails.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.object,
+  }).isRequired,
+};

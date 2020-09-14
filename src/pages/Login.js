@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import './styles/Login.css';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -26,30 +27,30 @@ const Login = () => {
   };
 
   return (
-    <form>
-      <input
-        type="email"
-        placeholder="Email"
-        data-testid="email-input"
-        onChange={(event) => setEmail(event.target.value)}
-      />
-      <input
-        type="password"
-        placeholder="Senha"
-        data-testid="password-input"
-        onChange={(event) => setPassword(event.target.value)}
-      />
-      <Link to="/comidas">
-        <button
-          type="button"
-          data-testid="login-submit-btn"
-          onClick={() => setLocalStorage()}
-          disabled={loginButton}
-        >
-          Entrar
-        </button>
-      </Link>
-    </form>
+    <section className="login-container">
+      <form className="login-input">
+        <h1>Login</h1>
+        <input
+          className="login-input-email" type="email"
+          placeholder="Email" data-testid="email-input"
+          onChange={(event) => setEmail(event.target.value)}
+        />
+        <input
+          className="login-input-password" type="password"
+          placeholder="Senha" data-testid="password-input"
+          onChange={(event) => setPassword(event.target.value)}
+        />
+        <Link to="/comidas">
+          <button
+            className="btn btn-orange" type="button"
+            data-testid="login-submit-btn" disabled={loginButton}
+            onClick={() => setLocalStorage()}
+          >
+            Entrar
+          </button>
+        </Link>
+      </form>
+    </section>
   );
 };
 

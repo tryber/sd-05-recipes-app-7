@@ -1,17 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
+import { Redirect } from 'react-router-dom';
 
-import fetchDrinks from '../services/fetchDrinks';
+import Footer from '../components/Footer';
 import DrinkCard from '../components/Cards/DrinkCard';
 import Header from '../components/Header/Header';
-import Footer from '../components/Footer';
+import DrinkContext from '../context/DrinkContext';
+import fetchDrinks from '../services/fetchDrinks';
+
+function Alert(array) {
+  return array === null
+    ? alert('Sinto muito, não encontramos nenhuma receita para esses filtros.')
+    : null;
+}
 
 const Drinks = () => {
+  const { drinks, requestDrinks } = useContext(DrinkContext);
   const [loading, setLoading] = useState(true);
-  const [drinks, setDrinks] = useState([]);
 
   useEffect(() => {
     fetchDrinks().then((data) => {
-      setDrinks(data);
+      requestDrinks(data);
       setLoading(false);
     });
   }, []);
@@ -21,7 +29,9 @@ const Drinks = () => {
   ) : (
     <section>
       <Header title={'Bebidas'} />
-      {drinks.map((drink, index) => {
+      {Alert(drinks)}
+      {drinks && drinks.length === 1 ? <Redirect to={`/bebidas/${drinks[0].idDrink}`} /> : null}
+      {drinks && drinks.map((drink, index) => {
         if (index < 12) {
           return <DrinkCard drink={drink} index={index} />;
         }
