@@ -43,8 +43,14 @@ function App() {
                 <Route exact path="/explorar" component={Explore} />
                 <Route exact path="/explorar/comidas" component={ExploreFoods} />
                 <Route exact path="/explorar/bebidas" component={ExploreDrinks} />
-                <Route path="/explorar/comidas/ingredientes" component={ExploreFoodsByIngredient} />
-                <Route path="/explorar/bebidas/ingredientes" component={ExploreDrinksByIngredient} />
+                <Route
+                  path="/explorar/comidas/ingredientes"
+                  component={ExploreFoodsByIngredient}
+                />
+                <Route
+                  path="/explorar/bebidas/ingredientes"
+                  component={ExploreDrinksByIngredient}
+                />
                 <Route path="/explorar/comidas/area" component={ExploreFoodsByLocal} />
                 <Route path="/perfil" component={Profile} />
                 <Route path="/receitas-feitas" component={RecipesDone} />
