@@ -39,7 +39,7 @@ function FoodDetails(props) {
         <iframe width="420" height="315" src={youtubeURL()} data-testid="video" />
       ) : null}
       <DrinkCarousel />
-      <StartRecipeButton url={props} />
+      <StartRecipeButton url={props} foodRecipe={singleFood} />
     </div>
   );
 }

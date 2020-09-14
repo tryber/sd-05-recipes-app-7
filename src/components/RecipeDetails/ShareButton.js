@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { copy } from 'clipboard-copy';
 
 import shareIcon from '../../images/shareIcon.svg';
 
+const copy = require('clipboard-copy');
+
 function copyToClipboard(text) {
-  if (!text) copy(text);
+  copy(text);
   return alert('Link copiado!');
 }
 
