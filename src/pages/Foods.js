@@ -8,7 +8,7 @@ import FoodContext from '../context/FoodContext';
 import fetchFoods from '../services/fetchFoods';
 import ExploreFoods from '../components/Explore/ExploreFoods';
 import CategoryContext from '../context/CategoryContext';
-import { filterByCategory } from '../services/ExtraFunctions';
+import filterByCategory from '../services/ExtraFunctions';
 
 function Alert(array) {
   return array.length === 0

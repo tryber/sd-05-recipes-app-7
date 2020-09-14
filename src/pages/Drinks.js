@@ -8,7 +8,7 @@ import DrinkContext from '../context/DrinkContext';
 import fetchDrinks from '../services/fetchDrinks';
 import ExploreDrinks from '../components/Explore/ExploreDrinks';
 import CategoryContext from '../context/CategoryContext';
-import { filterByCategory } from '../services/ExtraFunctions';
+import filterByCategory from '../services/ExtraFunctions';
 
 function Alert(array) {
   return array.length === 0
