@@ -1,32 +1,39 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+
+const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+
+function mapIngredients(recipe) {
+  const validKeys = Object.keys(recipe).filter(
+    (key) => key.includes('Ingredient') && recipe[key] !== '' && recipe[key] !== null,
+  );
+
+  return validKeys.map((key) => recipe[key]);
+}
 
 function StartRecipeButton(props) {
   const { pathname } = props.url.location;
   const { id } = props.url.match.params;
   const { foodRecipe, drinkRecipe } = props;
+  const isFood = drinkRecipe === undefined;
 
-  const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
-
-  function checkRecipes() {
+  function checkDoneRecipes() {
     return doneRecipes.some((recipe) => recipe.id === id);
   }
 
-  function mapIngredients(recipe) {
-    const validKeys = Object.keys(recipe).filter(
-      (key) => key.includes('Ingredient') && recipe[key] !== '' && recipe[key] !== null,
-    );
-
-    return validKeys.map((key) => recipe[key]);
+  function checkInProgressRecipes() {
+    return isFood
+      ? Object.keys(inProgressRecipes.meals).some((key) => id === key)
+      : Object.keys(inProgressRecipes.cocktails).some((key) => id === key);
   }
 
   function addRecipe() {
     const recipesInProgress = JSON.parse(localStorage.getItem('inProgressRecipes'));
-
     let updatedRecipesInProgress = {};
 
-    if (drinkRecipe === undefined) {
+    if (isFood) {
       updatedRecipesInProgress = {
         ...recipesInProgress,
         meals: {
@@ -46,15 +53,19 @@ function StartRecipeButton(props) {
     localStorage.setItem('inProgressRecipes', JSON.stringify(updatedRecipesInProgress));
   }
 
-  return (
+  return !checkDoneRecipes() ? (
     <Link to={`${pathname}/in-progress`}>
-      {!checkRecipes() ? (
+      {checkInProgressRecipes() ? (
+        <button data-testid="start-recipe-btn" className="btn-recipe">
+          Continuar Receita
+        </button>
+      ) : (
         <button data-testid="start-recipe-btn" className="btn-recipe" onClick={() => addRecipe()}>
           Iniciar Receita
         </button>
-      ) : null}
+      )}
     </Link>
-  );
+  ) : null;
 }
 
 export default StartRecipeButton;

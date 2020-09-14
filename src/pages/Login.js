@@ -6,8 +6,6 @@ const setLocalStorage = (email) => {
   localStorage.setItem('mealsToken', 1);
   localStorage.setItem('cocktailsToken', 1);
   localStorage.setItem('user', JSON.stringify({ email }));
-  localStorage.setItem('doneRecipes', JSON.stringify([{}]));
-  localStorage.setItem('inProgressRecipes', JSON.stringify({ cocktails: {}, meals: {} }));
 };
 
 const Login = () => {
