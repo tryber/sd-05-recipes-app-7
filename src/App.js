@@ -6,6 +6,7 @@ import './App.css';
 import HeaderProvider from './context/Providers/HeaderProvider';
 import FoodProvider from './context/Providers/FoodProvider';
 import DrinkProvider from './context/Providers/DrinkProvider';
+import CategoryProvider from './context/Providers/CategoryProvider';
 
 import Login from './pages/Login';
 import Foods from './pages/Foods';
@@ -29,6 +30,7 @@ function App() {
     <FoodProvider>
       <DrinkProvider>
         <HeaderProvider>
+        <CategoryProvider>
           <BrowserRouter>
             <Switch>
               <Route exact path="/" component={Login} />
@@ -49,6 +51,7 @@ function App() {
               <Route path="/receitas-favoritas" component={FavoriteRecipes} />
             </Switch>
           </BrowserRouter>
+          </CategoryProvider>
         </HeaderProvider>
       </DrinkProvider>
     </FoodProvider>

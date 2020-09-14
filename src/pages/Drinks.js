@@ -6,9 +6,12 @@ import DrinkCard from '../components/Cards/DrinkCard';
 import Header from '../components/Header/Header';
 import DrinkContext from '../context/DrinkContext';
 import fetchDrinks from '../services/fetchDrinks';
+import ExploreDrinks from '../components/Explore/ExploreDrinks';
+import CategoryContext from '../context/CategoryContext';
+import { filterByCategory } from '../services/ExtraFunctions';
 
 function Alert(array) {
-  return array === null
+  return array.length === 0
     ? alert('Sinto muito, não encontramos nenhuma receita para esses filtros.')
     : null;
 }
@@ -16,6 +19,7 @@ function Alert(array) {
 const Drinks = () => {
   const { drinks, requestDrinks } = useContext(DrinkContext);
   const [loading, setLoading] = useState(true);
+  const { category } = useContext(CategoryContext);
 
   useEffect(() => {
     fetchDrinks().then((data) => {
@@ -29,14 +33,18 @@ const Drinks = () => {
   ) : (
     <section>
       <Header title={'Bebidas'} />
-      {Alert(drinks)}
-      {drinks && drinks.length === 1 ? <Redirect to={`/bebidas/${drinks[0].idDrink}`} /> : null}
-      {drinks && drinks.map((drink, index) => {
-        if (index < 12) {
-          return <DrinkCard drink={drink} index={index} />;
-        }
-        return null;
-      })}
+      <ExploreDrinks />
+      {drinks && drinks.length === 1 ? (
+        <Redirect to={`/bebidas/${drinks[0].idDrink}`} />
+      ) : null}
+      {drinks &&
+        filterByCategory(drinks, category).map((drink, index) => {
+          if (index < 12) {
+            return <DrinkCard drink={drink} index={index} />;
+          }
+          return null;
+        })}
+      {Alert(filterByCategory(drinks, category))}
       <Footer />
     </section>
   );
