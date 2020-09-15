@@ -16,21 +16,37 @@ function mapIngredients(recipe) {
   return validKeys.map((key) => recipe[key]);
 }
 
+function StartButton(path, checkProgress, addRecipe) {
+  return (
+    <Link to={`${path}/in-progress`}>
+      {checkProgress() ? (
+        <button data-testid="start-recipe-btn" className="btn-recipe">
+          Continuar Receita
+        </button>
+      ) : (
+        <button data-testid="start-recipe-btn" className="btn-recipe" onClick={() => addRecipe()}>
+          Iniciar Receita
+        </button>
+      )}
+    </Link>
+  );
+}
+
+function checkDoneRecipes(propsId) {
+  return doneRecipes.some((recipe) => recipe.id === propsId);
+}
+
+function checkInProgressRecipes(propsId, isFood) {
+  return isFood
+    ? Object.keys(inProgressRecipes.meals).some((key) => propsId === key)
+    : Object.keys(inProgressRecipes.cocktails).some((key) => propsId === key);
+}
+
 function StartRecipeButton(props) {
   const { pathname } = props.url.location;
   const { id } = props.url.match.params;
   const { foodRecipe, drinkRecipe } = props;
   const isFood = drinkRecipe === undefined;
-
-  function checkDoneRecipes() {
-    return doneRecipes.some((recipe) => recipe.id === id);
-  }
-
-  function checkInProgressRecipes() {
-    return isFood
-      ? Object.keys(inProgressRecipes.meals).some((key) => id === key)
-      : Object.keys(inProgressRecipes.cocktails).some((key) => id === key);
-  }
 
   const addRecipe = () => {
     let updatedRecipesInProgress = {};
@@ -53,21 +69,9 @@ function StartRecipeButton(props) {
       };
     }
     localStorage.setItem('inProgressRecipes', JSON.stringify(updatedRecipesInProgress));
-  }
+  };
 
-  return !checkDoneRecipes() ? (
-    <Link to={`${pathname}/in-progress`}>
-      {checkInProgressRecipes() ? (
-        <button data-testid="start-recipe-btn" className="btn-recipe">
-          Continuar Receita
-        </button>
-      ) : (
-        <button data-testid="start-recipe-btn" className="btn-recipe" onClick={() => addRecipe()}>
-          Iniciar Receita
-        </button>
-      )}
-    </Link>
-  ) : null;
+  return !checkDoneRecipes(id) ? StartButton(pathname, checkInProgressRecipes, addRecipe) : null;
 }
 
 export default StartRecipeButton;
