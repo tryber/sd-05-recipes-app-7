@@ -8,7 +8,7 @@ const CategoryProvider = ({ children }) => {
   const selectCategory = (e) => {
     if (e.target.name === category) {
       setCategory('All');
-    } else { 
+    } else {
       setCategory(e.target.name);
     }
   };

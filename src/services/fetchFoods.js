@@ -34,5 +34,5 @@ export function fetchByCategories(text, category) {
   return fetch(api)
     .then((response) => response.json())
     .then((cat) => cat.meals)
-    .catch((error) => console.error(error))
-};
+    .catch((error) => console.error(error));
+}
