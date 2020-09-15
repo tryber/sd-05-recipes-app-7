@@ -6,7 +6,7 @@ import { fetchDrinkId } from '../services/fetchDrinks';
 import IngredientList from '../components/RecipeDetails/IngredientList';
 import FoodCarousel from '../components/RecipeDetails/FoodCarousel';
 import ShareButton from '../components/RecipeDetails/ShareButton';
-import FavoriteButton from '../components/RecipeDetails/FavoriteButton';
+import FavoriteDrink from '../components/RecipeDetails/FavoriteDrink';
 import StartRecipeButton from '../components/RecipeDetails/StartRecipeButton';
 
 function DrinkDetails(props) {
@@ -29,7 +29,7 @@ function DrinkDetails(props) {
     <div>
       <img src={singleDrink.strDrinkThumb} data-testid="recipe-photo" alt="Drink" />
       <ShareButton />
-      <FavoriteButton recipe={singleDrink} />
+      <FavoriteDrink recipe={singleDrink} />
       <h1 data-testid="recipe-title">{singleDrink.strDrink}</h1>
       <h3 data-testid="recipe-category">
         {singleDrink.strCategory}

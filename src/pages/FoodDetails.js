@@ -6,7 +6,7 @@ import { fetchFoodId } from '../services/fetchFoods';
 import IngredientList from '../components/RecipeDetails/IngredientList';
 import DrinkCarousel from '../components/RecipeDetails/DrinkCarousel';
 import ShareButton from '../components/RecipeDetails/ShareButton';
-import FavoriteButton from '../components/RecipeDetails/FavoriteButton';
+import FavoriteFood from '../components/RecipeDetails/FavoriteFood';
 import StartRecipeButton from '../components/RecipeDetails/StartRecipeButton';
 
 function FoodDetails(props) {
@@ -30,7 +30,7 @@ function FoodDetails(props) {
     <div>
       <img src={singleFood.strMealThumb} alt="Meal" data-testid="recipe-photo" />
       <ShareButton />
-      <FavoriteButton recipe={singleFood} />
+      <FavoriteFood recipe={singleFood} />
       <h1 data-testid="recipe-title">{singleFood.strMeal}</h1>
       <h3 data-testid="recipe-category">{singleFood.strCategory}</h3>
       <IngredientList singleItem={singleFood} />
