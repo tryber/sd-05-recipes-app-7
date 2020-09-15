@@ -11,7 +11,7 @@ import StartRecipeButton from '../components/RecipeDetails/StartRecipeButton';
 
 function DrinkDetails(props) {
   const { id } = props.match.params;
-  const [singleDrink, setSingleDrink] = useState({});
+  const [singleDrink, setSingleDrink] = useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -23,12 +23,12 @@ function DrinkDetails(props) {
 
   const youtubeURL = () => String(singleDrink.strVideo).replace('watch?v=', 'embed/');
 
-  return loading && !singleDrink ? (
+  return loading || !singleDrink ? (
     <section>Loading...</section>
   ) : (
     <div>
       <img src={singleDrink.strDrinkThumb} data-testid="recipe-photo" alt="Drink" />
-      <ShareButton url={props} />
+      <ShareButton />
       <FavoriteButton recipe={singleDrink} />
       <h1 data-testid="recipe-title">{singleDrink.strDrink}</h1>
       <h3 data-testid="recipe-category">

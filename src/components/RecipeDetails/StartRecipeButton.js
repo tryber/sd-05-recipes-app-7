@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
-const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes')) || [];
+const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes')) || {
+  meals: [],
+  cocktails: [],
+};
 
 function mapIngredients(recipe) {
   const validKeys = Object.keys(recipe).filter(
@@ -29,23 +32,22 @@ function StartRecipeButton(props) {
       : Object.keys(inProgressRecipes.cocktails).some((key) => id === key);
   }
 
-  function addRecipe() {
-    const recipesInProgress = JSON.parse(localStorage.getItem('inProgressRecipes'));
+  const addRecipe = () => {
     let updatedRecipesInProgress = {};
 
     if (isFood) {
       updatedRecipesInProgress = {
-        ...recipesInProgress,
+        ...inProgressRecipes,
         meals: {
-          ...recipesInProgress.meals,
+          ...inProgressRecipes.meals,
           [foodRecipe.idMeal]: mapIngredients(foodRecipe),
         },
       };
     } else {
       updatedRecipesInProgress = {
-        ...recipesInProgress,
+        ...inProgressRecipes,
         cocktails: {
-          ...recipesInProgress.cocktails,
+          ...inProgressRecipes.cocktails,
           [drinkRecipe.idDrink]: mapIngredients(drinkRecipe),
         },
       };

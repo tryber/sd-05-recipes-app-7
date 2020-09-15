@@ -19,6 +19,7 @@ const Drinks = () => {
 
   useEffect(() => {
     fetchDrinks().then((data) => {
+      console.log(data);
       requestDrinks(data);
       setLoading(false);
     });

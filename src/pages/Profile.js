@@ -5,7 +5,7 @@ import Footer from '../components/Footer';
 import SearchlessHeader from '../components/Header/SearchlessHeader';
 
 function Profile() {
-  const user = JSON.parse(localStorage.getItem('user'));
+  const user = JSON.parse(localStorage.getItem('user')) || { email: '' };
 
   return (
     <div>
