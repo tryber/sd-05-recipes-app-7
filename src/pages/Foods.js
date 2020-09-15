@@ -8,7 +8,6 @@ import FoodContext from '../context/FoodContext';
 import fetchFoods from '../services/fetchFoods';
 import ExploreFoods from '../components/Explore/ExploreFoods';
 import CategoryContext from '../context/CategoryContext';
-import filterByCategory from '../services/ExtraFunctions';
 
 function Alert(array) {
   return array.length === 0
@@ -22,7 +21,7 @@ const Foods = () => {
   const { category } = useContext(CategoryContext);
 
   useEffect(() => {
-    fetchFoods().then((data) => {
+    fetchFoods(category).then((data) => {
       requestFoods(data);
       setLoading(false);
     });
@@ -38,14 +37,13 @@ const Foods = () => {
         <Redirect to={`/comidas/${foods[0].idMeal}`} />
       ) : null}
       {foods &&
-        filterByCategory(foods, category).map((food, index) => {
+        foods.map((food, index) => {
           if (index < 12) {
             return <FoodCard food={food} index={index} />;
           }
           return null;
         })}
-      {Alert(filterByCategory(foods, category))}
-      {console.log(filterByCategory(foods))}
+      {Alert(foods)}
       <Footer />
     </section>
   );

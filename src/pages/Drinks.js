@@ -8,7 +8,6 @@ import DrinkContext from '../context/DrinkContext';
 import fetchDrinks from '../services/fetchDrinks';
 import ExploreDrinks from '../components/Explore/ExploreDrinks';
 import CategoryContext from '../context/CategoryContext';
-import filterByCategory from '../services/ExtraFunctions';
 
 function Alert(array) {
   return array.length === 0
@@ -22,7 +21,7 @@ const Drinks = () => {
   const { category } = useContext(CategoryContext);
 
   useEffect(() => {
-    fetchDrinks().then((data) => {
+    fetchDrinks(category).then((data) => {
       requestDrinks(data);
       setLoading(false);
     });
@@ -38,13 +37,13 @@ const Drinks = () => {
         <Redirect to={`/bebidas/${drinks[0].idDrink}`} />
       ) : null}
       {drinks &&
-        filterByCategory(drinks, category).map((drink, index) => {
+        drinks.map((drink, index) => {
           if (index < 12) {
             return <DrinkCard drink={drink} index={index} />;
           }
           return null;
         })}
-      {Alert(filterByCategory(drinks, category))}
+      {Alert(drinks)}
       <Footer />
     </section>
   );

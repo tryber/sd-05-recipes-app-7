@@ -6,6 +6,8 @@ export default function fetchFoods(text = '', type = '') {
     api = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${text}`;
   } else if (type === 'firstLetter') {
     api = `https://www.themealdb.com/api/json/v1/1/search.php?f=${text}`;
+  } else if (type === 'category') {
+    api = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${text}`;
   } else {
     api = `https://www.themealdb.com/api/json/v1/1/search.php?s=${text}`;
   }
@@ -21,3 +23,16 @@ export function fetchFoodId(id) {
     .then((data) => data.meals[0])
     .catch((error) => console.error(error));
 }
+
+export function fetchByCategories(text, category) {
+  let api = '';
+  if (text === '' || text === 'All' || text === category) {
+    api = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
+  } else {
+    api = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${text}`;
+  }
+  return fetch(api)
+    .then((response) => response.json())
+    .then((cat) => cat.meals)
+    .catch((error) => console.error(error))
+};
