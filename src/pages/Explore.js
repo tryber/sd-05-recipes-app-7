@@ -11,7 +11,7 @@ function Explore() {
         <button data-testid="explore-food">Explorar Comidas</button>
       </Link>
       <Link to="/explorar/bebidas">
-       <button data-testid="explore-drinks">Explorar Bebidas</button>
+        <button data-testid="explore-drinks">Explorar Bebidas</button>
       </Link>
       <Footer />
     </div>

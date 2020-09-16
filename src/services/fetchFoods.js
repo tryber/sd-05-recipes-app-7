@@ -23,7 +23,7 @@ export function fetchFoodId(id) {
 }
 
 export function fetchIngredient() {
-  return fetch(`https://www.themealdb.com/api/json/v1/1/list.php?i=list`)
+  return fetch('https://www.themealdb.com/api/json/v1/1/list.php?i=list')
     .then((response) => response.json())
     .then((data) => data.meals)
     .catch((error) => console.error(error));
@@ -34,4 +34,4 @@ export function filterIngredientFood(name) {
     .then((response) => response.json())
     .then((data) => data.meals[0])
     .catch((error) => console.error(error));
-} 
+}
