@@ -16,31 +16,38 @@ function mapIngredients(recipe) {
   return validKeys.map((key) => recipe[key]);
 }
 
-function StartButton(path, checkProgress, addRecipe) {
-  return (
-    <Link to={`${path}/in-progress`}>
-      {checkProgress() ? (
-        <button data-testid="start-recipe-btn" className="btn-recipe">
-          Continuar Receita
-        </button>
-      ) : (
-        <button data-testid="start-recipe-btn" className="btn-recipe" onClick={() => addRecipe()}>
-          Iniciar Receita
-        </button>
-      )}
-    </Link>
-  );
+function checkDoneRecipes(id) {
+  return doneRecipes.some((recipe) => recipe.id === id);
 }
 
-function checkDoneRecipes(propsId) {
-  return doneRecipes.some((recipe) => recipe.id === propsId);
-}
-
-function checkInProgressRecipes(propsId, isFood) {
+function checkInProgressRecipes(id, isFood) {
   return isFood
-    ? Object.keys(inProgressRecipes.meals).some((key) => propsId === key)
-    : Object.keys(inProgressRecipes.cocktails).some((key) => propsId === key);
+    ? Object.keys(inProgressRecipes.meals).some((key) => id === key)
+    : Object.keys(inProgressRecipes.cocktails).some((key) => id === key);
 }
+
+const addRecipe = (isFood, foodRecipe, drinkRecipe) => {
+  let updatedRecipesInProgress = {};
+
+  if (isFood) {
+    updatedRecipesInProgress = {
+      ...inProgressRecipes,
+      meals: {
+        ...inProgressRecipes.meals,
+        [foodRecipe.idMeal]: mapIngredients(foodRecipe),
+      },
+    };
+  } else {
+    updatedRecipesInProgress = {
+      ...inProgressRecipes,
+      cocktails: {
+        ...inProgressRecipes.cocktails,
+        [drinkRecipe.idDrink]: mapIngredients(drinkRecipe),
+      },
+    };
+  }
+  localStorage.setItem('inProgressRecipes', JSON.stringify(updatedRecipesInProgress));
+};
 
 function StartRecipeButton(props) {
   const { pathname } = props.url.location;
@@ -48,30 +55,23 @@ function StartRecipeButton(props) {
   const { foodRecipe, drinkRecipe } = props;
   const isFood = drinkRecipe === undefined;
 
-  const addRecipe = () => {
-    let updatedRecipesInProgress = {};
-
-    if (isFood) {
-      updatedRecipesInProgress = {
-        ...inProgressRecipes,
-        meals: {
-          ...inProgressRecipes.meals,
-          [foodRecipe.idMeal]: mapIngredients(foodRecipe),
-        },
-      };
-    } else {
-      updatedRecipesInProgress = {
-        ...inProgressRecipes,
-        cocktails: {
-          ...inProgressRecipes.cocktails,
-          [drinkRecipe.idDrink]: mapIngredients(drinkRecipe),
-        },
-      };
-    }
-    localStorage.setItem('inProgressRecipes', JSON.stringify(updatedRecipesInProgress));
-  };
-
-  return !checkDoneRecipes(id) ? StartButton(pathname, checkInProgressRecipes, addRecipe) : null;
+  return !checkDoneRecipes(id) ? (
+    <Link to={`${pathname}/in-progress`}>
+      {checkInProgressRecipes(id, isFood) ? (
+        <button data-testid="start-recipe-btn" className="btn-recipe">
+          Continuar Receita
+        </button>
+      ) : (
+        <button
+          data-testid="start-recipe-btn"
+          className="btn-recipe"
+          onClick={() => addRecipe(isFood, foodRecipe, drinkRecipe)}
+        >
+          Iniciar Receita
+        </button>
+      )}
+    </Link>
+  ) : null;
 }
 
 export default StartRecipeButton;
