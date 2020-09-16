@@ -6,12 +6,12 @@ import { fetchDrinkId } from '../services/fetchDrinks';
 import IngredientList from '../components/RecipeDetails/IngredientList';
 import FoodCarousel from '../components/RecipeDetails/FoodCarousel';
 import ShareButton from '../components/RecipeDetails/ShareButton';
-import FavoriteButton from '../components/RecipeDetails/FavoriteButton';
+import FavoriteDrink from '../components/RecipeDetails/FavoriteDrink';
 import StartRecipeButton from '../components/RecipeDetails/StartRecipeButton';
 
 function DrinkDetails(props) {
   const { id } = props.match.params;
-  const [singleDrink, setSingleDrink] = useState({});
+  const [singleDrink, setSingleDrink] = useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -23,13 +23,13 @@ function DrinkDetails(props) {
 
   const youtubeURL = () => String(singleDrink.strVideo).replace('watch?v=', 'embed/');
 
-  return loading && !singleDrink ? (
+  return loading || !singleDrink ? (
     <section>Loading...</section>
   ) : (
     <div>
       <img src={singleDrink.strDrinkThumb} data-testid="recipe-photo" alt="Drink" />
-      <ShareButton url={props} />
-      <FavoriteButton recipe={singleDrink} />
+      <ShareButton />
+      <FavoriteDrink recipe={singleDrink} />
       <h1 data-testid="recipe-title">{singleDrink.strDrink}</h1>
       <h3 data-testid="recipe-category">
         {singleDrink.strCategory}
@@ -41,7 +41,7 @@ function DrinkDetails(props) {
         <iframe width="420" height="315" src={youtubeURL()} data-testid="video" />
       ) : null}
       <FoodCarousel />
-      <StartRecipeButton url={props} />
+      <StartRecipeButton url={props} drinkRecipe={singleDrink} />
     </div>
   );
 }

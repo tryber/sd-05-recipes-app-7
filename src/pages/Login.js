@@ -2,6 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './styles/Login.css';
 
+const setLocalStorage = (email) => {
+  localStorage.setItem('mealsToken', 1);
+  localStorage.setItem('cocktailsToken', 1);
+  localStorage.setItem('user', JSON.stringify({ email }));
+};
+
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -19,12 +25,6 @@ const Login = () => {
   useEffect(() => {
     validateUser(email, password);
   }, [email, password]);
-
-  const setLocalStorage = () => {
-    localStorage.setItem('mealsToken', 1);
-    localStorage.setItem('cocktailsToken', 1);
-    localStorage.setItem('user', JSON.stringify({ email }));
-  };
 
   return (
     <section className="login-container">
@@ -44,7 +44,7 @@ const Login = () => {
           <button
             className="btn btn-orange" type="button"
             data-testid="login-submit-btn" disabled={loginButton}
-            onClick={() => setLocalStorage()}
+            onClick={() => setLocalStorage(email)}
           >
             Entrar
           </button>

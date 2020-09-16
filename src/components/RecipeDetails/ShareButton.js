@@ -1,20 +1,21 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { copy } from 'clipboard-copy';
 
 import shareIcon from '../../images/shareIcon.svg';
 
+const copy = require('clipboard-copy');
+
 function copyToClipboard(text) {
-  if (!text) copy(text);
-  return alert('Link copiado!');
+  copy(text);
+  document.getElementById('share-button').innerHTML = 'Link copiado!';
 }
 
-function ShareButton(props) {
-  const { pathname } = props.url.location;
+function ShareButton() {
+  const pathname = window.location.href;
 
   return (
     <input
       type="image"
+      id="share-button"
       src={shareIcon}
       alt="Share Button"
       data-testid="share-btn"
@@ -24,9 +25,3 @@ function ShareButton(props) {
 }
 
 export default ShareButton;
-
-ShareButton.propTypes = {
-  url: PropTypes.shape({
-    location: PropTypes.string.isRequired,
-  }).isRequired,
-};
