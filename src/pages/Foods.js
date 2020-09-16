@@ -14,7 +14,7 @@ function Alert(array) {
 }
 
 const Foods = () => {
-  const { foods, requestFoods } = useContext(FoodContext);
+  const { foods, requestFoods, ingredient } = useContext(FoodContext);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -24,10 +24,15 @@ const Foods = () => {
     });
   }, []);
 
+  useEffect(() => {
+    
+  },[foods]);
+
   return loading ? (
     <section>Loading...</section>
   ) : (
     <section>
+      {console.log(ingredient)}
       <Header title={'Comidas'} />
       {Alert(foods)}
       {foods && foods.length === 1 ? <Redirect to={`/comidas/${foods[0].idMeal}`} /> : null}
