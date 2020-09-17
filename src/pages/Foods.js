@@ -6,7 +6,6 @@ import FoodCard from '../components/Cards/FoodCard';
 import Header from '../components/Header/Header';
 import FoodContext from '../context/FoodContext';
 import fetchFoods from '../services/fetchFoods';
-import filterIngredientFood from '../services/fetchFoods';
 
 function Alert(array) {
   return array === null
@@ -15,20 +14,22 @@ function Alert(array) {
 }
 
 const Foods = () => {
-  const { foods, requestFoods, ingredient } = useContext(FoodContext);
+  const { foods, requestFoods, ingredient, setIngredient } = useContext(FoodContext);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchFoods().then((data) => {
-      requestFoods(data);
-      setLoading(false);
-    });
-  }, []);
-
-  useEffect(() => {
-    filterIngredientFood(ingredient).then((data) => {
-      requestFoods(data);
-    });
+    if (ingredient === '') {
+      fetchFoods().then((data) => {
+        requestFoods(data);
+        setLoading(false);
+      });
+    } else {
+      fetchFoods(ingredient, 'ingredient').then((data) => {
+        requestFoods(data);
+        setLoading(false);
+        setIngredient('');
+      });
+    }
   }, []);
 
   return loading ? (

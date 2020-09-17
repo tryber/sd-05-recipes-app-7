@@ -19,7 +19,7 @@ function IngredientDrinkCard(item) {
       >
         <img
           data-testid={`${item.index}-card-img`}
-          src={`https://www.themealdb.com/images/ingredients/${item.ingredient.strIngredient1}-Small.png`}
+          src={`https://www.thecocktaildb.com/images/ingredients/${item.ingredient.strIngredient1}-Small.png`}
           alt="Ingredient"
         />
         <p data-testid={`${item.index}-card-name`}>

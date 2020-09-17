@@ -6,7 +6,6 @@ import DrinkCard from '../components/Cards/DrinkCard';
 import Header from '../components/Header/Header';
 import DrinkContext from '../context/DrinkContext';
 import fetchDrinks from '../services/fetchDrinks';
-import filterIngredientFood from '../services/fetchDrinks';
 
 function Alert(array) {
   return array === null
@@ -19,16 +18,17 @@ const Drinks = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchDrinks().then((data) => {
-      requestDrinks(data);
-      setLoading(false);
-    });
-  }, []);
-
-  useEffect(() => {
-    filterIngredientFood(ingredient).then((data) => {
-      requestDrinks(data);
-    });
+    if (ingredient === '') {
+      fetchDrinks().then((data) => {
+        requestDrinks(data);
+        setLoading(false);
+      });
+    } else {
+      fetchDrinks(ingredient, 'ingredient').then((data) => {
+        requestDrinks(data);
+        setLoading(false);
+      });
+    }
   }, []);
 
   return loading ? (
@@ -38,12 +38,13 @@ const Drinks = () => {
       <Header title={'Bebidas'} />
       {Alert(drinks)}
       {drinks && drinks.length === 1 ? <Redirect to={`/bebidas/${drinks[0].idDrink}`} /> : null}
-      {drinks && drinks.map((drink, index) => {
-        if (index < 12) {
-          return <DrinkCard drink={drink} index={index} />;
-        }
-        return null;
-      })}
+      {drinks &&
+        drinks.map((drink, index) => {
+          if (index < 12) {
+            return <DrinkCard drink={drink} index={index} />;
+          }
+          return null;
+        })}
       <Footer />
     </section>
   );
