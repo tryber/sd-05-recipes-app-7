@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import { fetchFoodId } from '../services/fetchFoods';
 import IngredientChecklist from '../components/RecipeInProgress/IngredientChecklist';
@@ -30,9 +32,19 @@ function FoodInProgress(props) {
       <h3>Ingredients</h3>
       <IngredientChecklist singleItem={singleFood} />
       <p data-testid="instructions">{singleFood.strInstructions}</p>
-      <button data-testid="finish-recipe-btn">Finalizar Receita</button>
+      <Link to="/receitas-feitas">
+        <button data-testid="finish-recipe-btn">
+          Finalizar Receita
+        </button>
+      </Link>
     </section>
   );
 }
 
 export default FoodInProgress;
+
+FoodInProgress.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.object,
+  }).isRequired,
+};

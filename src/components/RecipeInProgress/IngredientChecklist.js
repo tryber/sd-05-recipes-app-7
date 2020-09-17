@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-// import './style.css';
+import './style.css';
 
 function IngredientList(props) {
   // https://medium.com/@vmarchesin/using-array-prototype-reduce-in-objects-using-javascript-dfcdae538fc8
@@ -29,7 +29,7 @@ function IngredientList(props) {
 
   return (
     <form>
-      {Object.entries(filterIngredients(props.singleItem)).map((key, index) =>
+      {Object.entries(filterIngredients(props.singleItem)).map((key, index) => (
         key[1] === null ? (
           <div data-testid={`${index}-ingredient-step`}>
             <input type="checkbox" id="ingredient" name="ingredients" value={key[0]} />
@@ -47,7 +47,7 @@ function IngredientList(props) {
             />
             <label htmlFor="ingredient" className="line-through">{`${key[0]} - ${key[1]}`}</label>
           </div>
-        ),
+        )),
       )}
     </form>
   );
