@@ -5,7 +5,7 @@ import './style.css';
 
 function IngredientList(props) {
   // https://medium.com/@vmarchesin/using-array-prototype-reduce-in-objects-using-javascript-dfcdae538fc8
-  const filterIngredients = () =>
+  const filterChecklist = () =>
     Object.keys(props.singleItem)
       .filter(
         (key) =>
@@ -29,7 +29,7 @@ function IngredientList(props) {
 
   return (
     <form>
-      {Object.entries(filterIngredients(props.singleItem)).map((key, index) => (
+      {Object.entries(filterChecklist(props.singleItem)).map((key, index) => (
         key[1] === null ? (
           <div data-testid={`${index}-ingredient-step`}>
             <input type="checkbox" id="ingredient" name="ingredients" value={key[0]} />

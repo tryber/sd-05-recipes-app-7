@@ -10,17 +10,17 @@ import FavoriteFood from '../components/RecipeDetails/FavoriteFood';
 function FoodInProgress(props) {
   const { id } = props.match.params;
   const [singleFood, setSingleFood] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   // const inProgressFood = JSON.parse(localStorage.getItem('inProgressRecipes')).meals[id] || [];
 
   useEffect(() => {
     fetchFoodId(id).then((data) => {
       setSingleFood(data);
-      setLoading(false);
+      setIsLoading(false);
     });
   }, []);
 
-  return loading || !singleFood ? (
+  return isLoading || !singleFood ? (
     <section>Loading...</section>
   ) : (
     <section>

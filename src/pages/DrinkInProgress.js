@@ -10,16 +10,16 @@ import FavoriteDrink from '../components/RecipeDetails/FavoriteDrink';
 function DrinkInProgress(props) {
   const { id } = props.match.params;
   const [singleDrink, setSingleDrink] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     fetchDrinkId(id).then((data) => {
       setSingleDrink(data);
-      setLoading(false);
+      setIsLoading(false);
     });
   }, []);
 
-  return loading || !singleDrink ? (
+  return isLoading || !singleDrink ? (
     <section>Loading...</section>
   ) : (
     <section>
