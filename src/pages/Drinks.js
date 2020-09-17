@@ -6,9 +6,10 @@ import DrinkCard from '../components/Cards/DrinkCard';
 import Header from '../components/Header/Header';
 import DrinkContext from '../context/DrinkContext';
 import fetchDrinks from '../services/fetchDrinks';
+import ExploreDrinks from '../components/Explore/ExploreDrinks';
 
 function Alert(array) {
-  return array === null
+  return array.length === 0
     ? alert('Sinto muito, não encontramos nenhuma receita para esses filtros.')
     : null;
 }
@@ -37,8 +38,10 @@ const Drinks = () => {
   ) : (
     <section>
       <Header title={'Bebidas'} />
-      {Alert(drinks)}
-      {drinks && drinks.length === 1 ? <Redirect to={`/bebidas/${drinks[0].idDrink}`} /> : null}
+      <ExploreDrinks />
+      {drinks && drinks.length === 1 ? (
+        <Redirect to={`/bebidas/${drinks[0].idDrink}`} />
+      ) : null}
       {drinks &&
         drinks.map((drink, index) => {
           if (index < 12) {
@@ -46,6 +49,7 @@ const Drinks = () => {
           }
           return null;
         })}
+      {Alert(drinks)}
       <Footer />
     </section>
   );

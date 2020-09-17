@@ -31,6 +31,18 @@ export function fetchIngredient() {
 export function filterIngredientFood(name) {
   return fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${name}`)
     .then((response) => response.json())
-    .then((data) => data.drinks[0])
+    .then((data) => data.drinks[0]);
+}
+
+export function fetchByCategories(text, category) {
+  let api = '';
+  if (text === '' || text === 'All' || text === category) {
+    api = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
+  } else {
+    api = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${text}`;
+  }
+  return fetch(api)
+    .then((response) => response.json())
+    .then((cat) => cat.drinks)
     .catch((error) => console.error(error));
 }
