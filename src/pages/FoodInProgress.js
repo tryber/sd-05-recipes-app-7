@@ -7,11 +7,23 @@ import IngredientChecklist from '../components/RecipeInProgress/IngredientCheckl
 import ShareButton from '../components/RecipeDetails/ShareButton';
 import FavoriteFood from '../components/RecipeDetails/FavoriteFood';
 
+const doneMeal = (meal) => ({
+  id: meal.idMeal,
+  type: 'comida',
+  area: meal.strArea || '',
+  category: meal.strCategory || '',
+  alcoholicOrNot: '',
+  name: meal.strMeal,
+  image: meal.strMealThumb,
+  doneDate: Date(),
+  tags: meal.strTags || [],
+});
+
 function FoodInProgress(props) {
   const { id } = props.match.params;
   const [singleFood, setSingleFood] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  // const inProgressFood = JSON.parse(localStorage.getItem('inProgressRecipes')).meals[id] || [];
+  const completedRecipes = JSON.parse(localStorage.getItem('doneRecipes')) || [];
 
   useEffect(() => {
     fetchFoodId(id).then((data) => {
@@ -19,6 +31,11 @@ function FoodInProgress(props) {
       setIsLoading(false);
     });
   }, []);
+
+  const finishRecipe = () => {
+    let finished = [...completedRecipes, doneMeal(singleFood)];
+    localStorage.setItem('doneRecipes', JSON.stringify(finished));
+  };
 
   return isLoading || !singleFood ? (
     <section>Loading...</section>
@@ -33,7 +50,7 @@ function FoodInProgress(props) {
       <IngredientChecklist singleItem={singleFood} />
       <p data-testid="instructions">{singleFood.strInstructions}</p>
       <Link to="/receitas-feitas">
-        <button data-testid="finish-recipe-btn">
+        <button data-testid="finish-recipe-btn" onClick={() => finishRecipe()}>
           Finalizar Receita
         </button>
       </Link>

@@ -7,10 +7,23 @@ import IngredientChecklist from '../components/RecipeInProgress/IngredientCheckl
 import ShareButton from '../components/RecipeDetails/ShareButton';
 import FavoriteDrink from '../components/RecipeDetails/FavoriteDrink';
 
+const doneCocktail = (drink) => ({
+  id: drink.idDrink,
+  type: 'bebida',
+  area: drink.strArea || '',
+  category: drink.strCategory || '',
+  alcoholicOrNot: '',
+  name: drink.strDrink,
+  image: drink.strDrinkThumb,
+  doneDate: Date(),
+  tags: drink.strTags || [],
+});
+
 function DrinkInProgress(props) {
   const { id } = props.match.params;
   const [singleDrink, setSingleDrink] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const completedRecipes = JSON.parse(localStorage.getItem('doneRecipes')) || [];
 
   useEffect(() => {
     fetchDrinkId(id).then((data) => {
@@ -18,6 +31,11 @@ function DrinkInProgress(props) {
       setIsLoading(false);
     });
   }, []);
+
+  const finishRecipe = () => {
+    let finished = [...completedRecipes, doneCocktail(singleDrink)];
+    localStorage.setItem('doneRecipes', JSON.stringify(finished));
+  };
 
   return isLoading || !singleDrink ? (
     <section>Loading...</section>
@@ -32,7 +50,7 @@ function DrinkInProgress(props) {
       <IngredientChecklist singleItem={singleDrink} />
       <p data-testid="instructions">{singleDrink.strInstructions}</p>
       <Link to="/receitas-feitas">
-        <button data-testid="finish-recipe-btn">
+        <button data-testid="finish-recipe-btn" onClick={() => finishRecipe()}>
           Finalizar Receita
         </button>
       </Link>
