@@ -35,7 +35,6 @@ const Foods = () => {
     <section>Loading...</section>
   ) : (
     <section>
-      {console.log(foods)}
       <Header title={'Comidas'} />
       {Alert(foods)}
       {foods && foods.length === 1 ? <Redirect to={`/comidas/${foods[0].idMeal}`} /> : null}
