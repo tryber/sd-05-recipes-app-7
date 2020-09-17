@@ -10,7 +10,7 @@ function copyToClipboard(text) {
 }
 
 function ShareButton() {
-  const pathname = window.location.href;
+  const pathname = window.location.href.replace('/in-progress', '');
 
   return (
     <input

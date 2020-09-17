@@ -1,0 +1,6 @@
+/* https://stackoverflow.com/questions/30975459/
+add-strikethrough-to-checked-checkbox#30975805 */
+
+input:checked + .line-through {
+  text-decoration: line-through;
+}
