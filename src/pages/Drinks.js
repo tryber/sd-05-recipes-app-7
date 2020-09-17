@@ -14,7 +14,7 @@ function Alert(array) {
 }
 
 const Drinks = () => {
-  const { drinks, requestDrinks, ingredient } = useContext(DrinkContext);
+  const { drinks, requestDrinks, ingredient, setIngredient } = useContext(DrinkContext);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -27,6 +27,7 @@ const Drinks = () => {
       fetchDrinks(ingredient, 'ingredient').then((data) => {
         requestDrinks(data);
         setLoading(false);
+        setIngredient('');
       });
     }
   }, []);

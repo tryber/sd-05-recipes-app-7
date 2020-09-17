@@ -6,7 +6,7 @@ function DrinkProvider({ children }) {
   const [searchText, setSearchText] = useState('');
   const [selectedFilter, setSelectedFilter] = useState('');
   const [drinks, setDrinks] = useState([]);
-  const [ingredient, setIngredient] = useState([]);
+  const [ingredient, setIngredient] = useState('');
 
   const requestDrinks = (data) => setDrinks(data);
 
