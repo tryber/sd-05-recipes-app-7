@@ -21,3 +21,16 @@ export function fetchDrinkId(id) {
     .catch((error) => console.error(error));
 }
 
+export function fetchIngredient() {
+  return fetch('https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list')
+    .then((response) => response.json())
+    .then((data) => data.drinks)
+    .catch((error) => console.error(error));
+}
+
+export function filterIngredientFood(name) {
+  return fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${name}`)
+    .then((response) => response.json())
+    .then((data) => data.drinks[0])
+    .catch((error) => console.error(error));
+}

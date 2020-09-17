@@ -6,6 +6,7 @@ import DrinkCard from '../components/Cards/DrinkCard';
 import Header from '../components/Header/Header';
 import DrinkContext from '../context/DrinkContext';
 import fetchDrinks from '../services/fetchDrinks';
+import filterIngredientFood from '../services/fetchDrinks';
 
 function Alert(array) {
   return array === null
@@ -14,14 +15,19 @@ function Alert(array) {
 }
 
 const Drinks = () => {
-  const { drinks, requestDrinks } = useContext(DrinkContext);
+  const { drinks, requestDrinks, ingredient } = useContext(DrinkContext);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetchDrinks().then((data) => {
-      console.log(data);
       requestDrinks(data);
       setLoading(false);
+    });
+  }, []);
+
+  useEffect(() => {
+    filterIngredientFood(ingredient).then((data) => {
+      requestDrinks(data);
     });
   }, []);
 

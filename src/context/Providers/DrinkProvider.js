@@ -6,6 +6,7 @@ function DrinkProvider({ children }) {
   const [searchText, setSearchText] = useState('');
   const [selectedFilter, setSelectedFilter] = useState('');
   const [drinks, setDrinks] = useState([]);
+  const [ingredient, setIngredient] = useState([]);
 
   const requestDrinks = (data) => setDrinks(data);
 
@@ -20,6 +21,8 @@ function DrinkProvider({ children }) {
     updateSearchText,
     selectedFilter,
     updateSelectedFilter,
+    ingredient,
+    setIngredient,
   };
 
   return <DrinkContext.Provider value={contextValue}>{children}</DrinkContext.Provider>;
