@@ -6,6 +6,7 @@ import FoodCard from '../components/Cards/FoodCard';
 import Header from '../components/Header/Header';
 import FoodContext from '../context/FoodContext';
 import fetchFoods from '../services/fetchFoods';
+import filterIngredientFood from '../services/fetchFoods';
 
 function Alert(array) {
   return array === null
@@ -14,7 +15,7 @@ function Alert(array) {
 }
 
 const Foods = () => {
-  const { foods, requestFoods } = useContext(FoodContext);
+  const { foods, requestFoods, ingredient } = useContext(FoodContext);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -24,10 +25,17 @@ const Foods = () => {
     });
   }, []);
 
+  useEffect(() => {
+    filterIngredientFood(ingredient).then((data) => {
+      requestFoods(data);
+    });
+  }, []);
+
   return loading ? (
     <section>Loading...</section>
   ) : (
     <section>
+      {console.log(foods)}
       <Header title={'Comidas'} />
       {Alert(foods)}
       {foods && foods.length === 1 ? <Redirect to={`/comidas/${foods[0].idMeal}`} /> : null}
