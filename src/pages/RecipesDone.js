@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import SearchLessHeader from '../components/Header/SearchlessHeader';
 import DoneDrinkCard from '../components/Cards/DoneDrinkCard';
@@ -6,34 +6,44 @@ import DoneFoodCard from '../components/Cards/DoneFoodCard';
 
 function RecipesDone() {
   const [filter, setFilter] = useState('All');
-  const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
-  const applyFilter = (type) => setFilter(type);
+  const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes')) || [];
+  const [filteredRecipes, setFilteredRecipes] = useState(doneRecipes);
+
+  useEffect(() => {
+    if (filter === 'Food') {
+      return setFilteredRecipes(doneRecipes.filter((items) => items.type === 'comida'));
+    } else if (filter === 'Drink') {
+      return setFilteredRecipes(doneRecipes.filter((items) => items.type === 'bebida'));
+    } else {
+      return setFilteredRecipes(doneRecipes);
+    }
+  }, [filter]);
 
   return (
     <section>
       <SearchLessHeader title={'Receitas Feitas'} />
       <section>
-        <button data-testid="filter-by-all-btn" onClick={() => applyFilter('All')}>
+        <button data-testid="filter-by-all-btn" onClick={() => setFilter('All')}>
           All
         </button>
-        <button data-testid="filter-by-food-btn" onClick={() => applyFilter('Food')}>
+        <button data-testid="filter-by-food-btn" onClick={() => setFilter('Food')}>
           Food
         </button>
-        <button data-testid="filter-by-drink-btn" onClick={() => applyFilter('Drink')}>
+        <button data-testid="filter-by-drink-btn" onClick={() => setFilter('Drink')}>
           Drinks
         </button>
       </section>
-      {doneRecipes.map((recipe, index) => {
+      {filteredRecipes.map((recipe, index) => {
         if (recipe.type === 'comida') {
           return (
-            <div style={filter === 'Drink' ? { display: 'none' } : null}>
-              <DoneFoodCard recipe={recipe} index={index} />;
+            <div>
+              <DoneFoodCard recipe={recipe} index={index} />
             </div>
           );
         }
         return (
-          <div style={filter === 'Food' ? { display: 'none' } : null}>
-            <DoneDrinkCard recipe={recipe} index={index} />;
+          <div>
+            <DoneDrinkCard recipe={recipe} index={index} />
           </div>
         );
       })}
