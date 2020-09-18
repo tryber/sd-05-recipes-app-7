@@ -49,3 +49,17 @@ export function fetchByCategories(text, category) {
     .then((cat) => cat.meals)
     .catch((error) => console.error(error));
 }
+
+export function fetchLocales() {
+  return fetch('https://www.themealdb.com/api/json/v1/1/list.php?a=list')
+    .then(response => response.json())
+    .then(data => data.meals)
+    .catch((error) => console.error(error));
+}
+
+export function fetchFoodByLocales(local) {
+  return fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${local}`)
+    .then(response => response.json())
+    .then(data => data.meals)
+    .catch((error) => console.error(error))
+}
