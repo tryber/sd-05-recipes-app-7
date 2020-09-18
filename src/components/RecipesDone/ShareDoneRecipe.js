@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import shareIcon from '../../images/shareIcon.svg';
 
@@ -25,3 +26,8 @@ function ShareDoneRecipe({ index, url }) {
 }
 
 export default ShareDoneRecipe;
+
+ShareDoneRecipe.propTypes = {
+  index: PropTypes.number.isRequired,
+  url: PropTypes.string.isRequired,
+};

@@ -32,8 +32,8 @@ function DrinkInProgress(props) {
     });
   }, []);
 
-  const finishRecipe = () => {
-    let finished = [...completedRecipes, doneCocktail(singleDrink)];
+  const finishCocktail = () => {
+    const finished = [...completedRecipes, doneCocktail(singleDrink)];
     localStorage.setItem('doneRecipes', JSON.stringify(finished));
   };
 
@@ -51,7 +51,7 @@ function DrinkInProgress(props) {
       <IngredientChecklist singleItem={singleDrink} />
       <p data-testid="instructions">{singleDrink.strInstructions}</p>
       <Link to="/receitas-feitas">
-        <button data-testid="finish-recipe-btn" onClick={() => finishRecipe()}>
+        <button data-testid="finish-recipe-btn" onClick={() => finishCocktail()}>
           Finalizar Receita
         </button>
       </Link>

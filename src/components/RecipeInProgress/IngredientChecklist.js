@@ -29,29 +29,23 @@ function IngredientList(props) {
 
   return (
     <form>
-      {Object.entries(filterChecklist(props.singleItem)).map((key, index) =>
+      {Object.entries(filterChecklist(props.singleItem)).map((key, index) => (
         key[1] === null ? (
           <div data-testid={`${index}-ingredient-step`}>
             <input
-              type="checkbox"
-              id="ingredient"
-              name="ingredients"
-              value={key[0]}
+              type="checkbox" id="ingredient"
+              name="ingredients" value={key[0]}
             />
-            <label htmlFor="ingredient" className="line-through">
-              {key[0]}
-            </label>
+            <label htmlFor="ingredient" className="line-through">{key[0]}</label>
           </div>
         ) : (
           <div data-testid={`${index}-ingredient-step`}>
             <input
-              type="checkbox"
-              id="ingredient"
-              name="ingredients"
-              value={`${key[0]} - ${key[1]}`}
+              type="checkbox" id="ingredient"
+              name="ingredients" value={`${key[0]} - ${key[1]}`}
             />
             <label htmlFor="ingredient" className="line-through">{`${key[0]} - ${key[1]}`}</label>
-          </div>
+          </div>)
         ),
       )}
     </form>

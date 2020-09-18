@@ -16,7 +16,7 @@ const doneMeal = (meal) => ({
   name: meal.strMeal,
   image: meal.strMealThumb,
   doneDate: Date(),
-  tags: meal.strTags.split(',') || [],
+  tags: (meal.strTags) ? meal.strTags.split(',') : [],
 });
 
 function FoodInProgress(props) {
@@ -32,8 +32,8 @@ function FoodInProgress(props) {
     });
   }, []);
 
-  const finishRecipe = () => {
-    let finished = [...completedRecipes, doneMeal(singleFood)];
+  const finishMeal = () => {
+    const finished = [...completedRecipes, doneMeal(singleFood)];
     localStorage.setItem('doneRecipes', JSON.stringify(finished));
   };
 
@@ -50,7 +50,7 @@ function FoodInProgress(props) {
       <IngredientChecklist singleItem={singleFood} />
       <p data-testid="instructions">{singleFood.strInstructions}</p>
       <Link to="/receitas-feitas">
-        <button data-testid="finish-recipe-btn" onClick={() => finishRecipe()}>
+        <button data-testid="finish-recipe-btn" onClick={() => finishMeal()}>
           Finalizar Receita
         </button>
       </Link>

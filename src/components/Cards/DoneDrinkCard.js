@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import ShareDoneRecipe from '../RecipesDone/ShareDoneRecipe';
 
@@ -20,3 +21,8 @@ function DoneDrinkCard({ recipe, index }) {
 }
 
 export default DoneDrinkCard;
+
+DoneDrinkCard.propTypes = {
+  recipe: PropTypes.instanceOf(Object).isRequired,
+  index: PropTypes.number.isRequired,
+};
