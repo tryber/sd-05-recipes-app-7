@@ -4,11 +4,9 @@ import FoodContext from '../../context/FoodContext';
 
 function IngredientFoodCard(item) {
   const { setIngredient } = useContext(FoodContext);
-
   return (
     <Link
       to="/comidas"
-      name={item.ingredient.strIngredient}
       onClick={(() => {
         setIngredient(item.ingredient.strIngredient);
       })}
