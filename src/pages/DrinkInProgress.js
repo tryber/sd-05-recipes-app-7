@@ -12,11 +12,11 @@ const doneCocktail = (drink) => ({
   type: 'bebida',
   area: drink.strArea || '',
   category: drink.strCategory || '',
-  alcoholicOrNot: '',
+  alcoholicOrNot: drink.strAlcoholic || '',
   name: drink.strDrink,
   image: drink.strDrinkThumb,
   doneDate: Date(),
-  tags: drink.strTags || [],
+  tags: (drink.strTags) ? drink.strTags.split(',') : [],
 });
 
 function DrinkInProgress(props) {
@@ -41,6 +41,7 @@ function DrinkInProgress(props) {
     <section>Loading...</section>
   ) : (
     <section>
+      {console.log(singleDrink)}
       <img src={singleDrink.strDrinkThumb} alt="Drink" data-testid="recipe-photo" />
       <h1 data-testid="recipe-title">{singleDrink.strDrink}</h1>
       <ShareButton />

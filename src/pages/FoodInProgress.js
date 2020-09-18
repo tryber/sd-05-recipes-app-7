@@ -16,7 +16,7 @@ const doneMeal = (meal) => ({
   name: meal.strMeal,
   image: meal.strMealThumb,
   doneDate: Date(),
-  tags: meal.strTags || [],
+  tags: meal.strTags.split(',') || [],
 });
 
 function FoodInProgress(props) {
