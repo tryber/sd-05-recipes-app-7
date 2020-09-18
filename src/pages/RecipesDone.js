@@ -14,9 +14,8 @@ function RecipesDone() {
       return setFilteredRecipes(doneRecipes.filter((items) => items.type === 'comida'));
     } else if (filter === 'Drink') {
       return setFilteredRecipes(doneRecipes.filter((items) => items.type === 'bebida'));
-    } else {
-      return setFilteredRecipes(doneRecipes);
     }
+    return setFilteredRecipes(doneRecipes);
   }, [filter]);
 
   return (

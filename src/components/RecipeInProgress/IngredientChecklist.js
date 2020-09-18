@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import './style.css';
 
-function IngredientList(props) {
+function IngredientChecklist(props) {
   // https://medium.com/@vmarchesin/using-array-prototype-reduce-in-objects-using-javascript-dfcdae538fc8
   const filterChecklist = () =>
     Object.keys(props.singleItem)
@@ -52,8 +52,8 @@ function IngredientList(props) {
   );
 }
 
-export default IngredientList;
+export default IngredientChecklist;
 
-IngredientList.propTypes = {
+IngredientChecklist.propTypes = {
   singleItem: PropTypes.instanceOf(Object).isRequired,
 };
