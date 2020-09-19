@@ -7,10 +7,23 @@ import IngredientChecklist from '../components/RecipeInProgress/IngredientCheckl
 import ShareButton from '../components/RecipeDetails/ShareButton';
 import FavoriteDrink from '../components/RecipeDetails/FavoriteDrink';
 
+const doneCocktail = (drink) => ({
+  id: drink.idDrink,
+  type: 'bebida',
+  area: drink.strArea || '',
+  category: drink.strCategory || '',
+  alcoholicOrNot: drink.strAlcoholic || '',
+  name: drink.strDrink,
+  image: drink.strDrinkThumb,
+  doneDate: Date(),
+  tags: (drink.strTags) ? drink.strTags.split(',') : [],
+});
+
 function DrinkInProgress(props) {
   const { id } = props.match.params;
   const [singleDrink, setSingleDrink] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const completedRecipes = JSON.parse(localStorage.getItem('doneRecipes')) || [];
 
   useEffect(() => {
     fetchDrinkId(id).then((data) => {
@@ -19,10 +32,16 @@ function DrinkInProgress(props) {
     });
   }, []);
 
+  const finishCocktail = () => {
+    const finished = [...completedRecipes, doneCocktail(singleDrink)];
+    localStorage.setItem('doneRecipes', JSON.stringify(finished));
+  };
+
   return isLoading || !singleDrink ? (
     <section>Loading...</section>
   ) : (
     <section>
+      {console.log(singleDrink)}
       <img src={singleDrink.strDrinkThumb} alt="Drink" data-testid="recipe-photo" />
       <h1 data-testid="recipe-title">{singleDrink.strDrink}</h1>
       <ShareButton />
@@ -32,7 +51,7 @@ function DrinkInProgress(props) {
       <IngredientChecklist singleItem={singleDrink} />
       <p data-testid="instructions">{singleDrink.strInstructions}</p>
       <Link to="/receitas-feitas">
-        <button data-testid="finish-recipe-btn">
+        <button data-testid="finish-recipe-btn" onClick={() => finishCocktail()}>
           Finalizar Receita
         </button>
       </Link>
