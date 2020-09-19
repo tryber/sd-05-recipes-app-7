@@ -20,10 +20,11 @@ import ExploreFoods from './pages/ExploreFoods';
 import ExploreDrinks from './pages/ExploreDrinks';
 import ExploreFoodsByIngredient from './pages/ExploreFoodsByIngredient';
 import ExploreDrinksByIngredient from './pages/ExploreDrinksByIngredient';
-import ExploreFoodsByLocal from './pages/ExploreFoodsByLocal';
+import ExploreFoodsByLocales from './pages/ExploreFoodsByLocales';
 import Profile from './pages/Profile';
 import FavoriteRecipes from './pages/FavoriteRecipes';
 import RecipesDone from './pages/RecipesDone';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
@@ -43,7 +44,7 @@ function App() {
                 <Route exact path="/explorar" component={Explore} />
                 <Route exact path="/explorar/comidas" component={ExploreFoods} />
                 <Route exact path="/explorar/bebidas" component={ExploreDrinks} />
-                <Route path="/explorar/comidas/area" component={ExploreFoodsByLocal} />
+                <Route path="/explorar/comidas/area" component={ExploreFoodsByLocales} />
                 <Route
                   path="/explorar/bebidas/ingredientes"
                   component={ExploreDrinksByIngredient}
@@ -52,6 +53,8 @@ function App() {
                 <Route path="/perfil" component={Profile} />
                 <Route path="/receitas-feitas" component={RecipesDone} />
                 <Route path="/receitas-favoritas" component={FavoriteRecipes} />
+                {/* https://stackoverflow.com/questions/32128978/react-router-no-not-found-route */}
+                <Route path="*" exact component={NotFound} />
               </Switch>
             </BrowserRouter>
           </HeaderProvider>
