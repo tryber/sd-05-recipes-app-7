@@ -22,7 +22,6 @@ const ExploreDrinksByIngredient = () => {
   ) : (
     <div>
       <SearchLessHeader title={'Explorar Ingredientes'} />
-      {console.log(ingredient)}
       {ingredient.slice(0, 12).map((item, index) => (
         <IngredientDrinkCard ingredient={item} index={index} />
       ))}

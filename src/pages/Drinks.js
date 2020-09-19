@@ -6,29 +6,31 @@ import DrinkCard from '../components/Cards/DrinkCard';
 import Header from '../components/Header/Header';
 import DrinkContext from '../context/DrinkContext';
 import fetchDrinks from '../services/fetchDrinks';
-import filterIngredientFood from '../services/fetchDrinks';
+import ExploreDrinks from '../components/Explore/ExploreDrinks';
 
 function Alert(array) {
-  return array === null
+  return array.length === 0
     ? alert('Sinto muito, não encontramos nenhuma receita para esses filtros.')
     : null;
 }
 
 const Drinks = () => {
-  const { drinks, requestDrinks, ingredient } = useContext(DrinkContext);
+  const { drinks, requestDrinks, ingredient, setIngredient } = useContext(DrinkContext);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchDrinks().then((data) => {
-      requestDrinks(data);
-      setLoading(false);
-    });
-  }, []);
-
-  useEffect(() => {
-    filterIngredientFood(ingredient).then((data) => {
-      requestDrinks(data);
-    });
+    if (ingredient === '') {
+      fetchDrinks().then((data) => {
+        requestDrinks(data);
+        setLoading(false);
+      });
+    } else {
+      fetchDrinks(ingredient, 'ingredient').then((data) => {
+        requestDrinks(data);
+        setLoading(false);
+        setIngredient('');
+      });
+    }
   }, []);
 
   return loading ? (
@@ -36,14 +38,18 @@ const Drinks = () => {
   ) : (
     <section>
       <Header title={'Bebidas'} />
+      <ExploreDrinks />
+      {drinks && drinks.length === 1 ? (
+        <Redirect to={`/bebidas/${drinks[0].idDrink}`} />
+      ) : null}
+      {drinks &&
+        drinks.map((drink, index) => {
+          if (index < 12) {
+            return <DrinkCard drink={drink} index={index} />;
+          }
+          return null;
+        })}
       {Alert(drinks)}
-      {drinks && drinks.length === 1 ? <Redirect to={`/bebidas/${drinks[0].idDrink}`} /> : null}
-      {drinks && drinks.map((drink, index) => {
-        if (index < 12) {
-          return <DrinkCard drink={drink} index={index} />;
-        }
-        return null;
-      })}
       <Footer />
     </section>
   );
