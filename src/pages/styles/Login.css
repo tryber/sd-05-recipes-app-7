@@ -1,34 +1,77 @@
 .login-container {
-  background-image: linear-gradient(to bottom, white, whitesmoke);
+  background-image: url('../../images/login_03.png');
+  background-size: cover;
   height: 95vh;
-  padding: 30px;
+  padding: 3rem;
   position: relative;
 }
 
 .login-input {
-  left: 50%;
+  left: 20%;
   position: absolute;
   text-align: center;
   top: 50%;
   transform: translate(-50%, -50%);
 }
 
-.login-input-email , .login-input-password {
-  border-radius: 10px;
-  display: block;
-  margin: 15px;
-  padding: 10px;
-  width: 30vw;
+.login-header {
+  animation: appear 1s ease-in;
+  color: white;
+  font-size: 4rem;
 }
 
-.btn {
-  background-image: linear-gradient(to right bottom, rgb(240, 112, 8), rgb(251, 146, 60));
-  border-radius: 10px;
-  padding: 15px;
+.login-input-email {
+  animation: fadeIn 1s ease-in;
+}
+
+.login-input-password {
+  animation: fadeIn 1s ease-in;
+}
+
+.login-input-email,
+.login-input-password {
+  border-radius: 1rem;
+  display: block;
+  margin: 1.5rem;
+  padding: 2rem;
+  text-align: center;
+  width: 15vw;
+}
+
+.login-input-email:focus,
+.login-input-password:focus {
+  background-color: rgb(251, 146, 60);
 }
 
 .btn:disabled {
-  background-color: green;
-  border-radius: 10px;
-  padding: 15px;
+  background-image: linear-gradient(to bottom right, whitesmoke, white);
+  border-radius: 1rem;
+  color: black;
+  font-weight: 700;
+  padding: 1.5rem;
+}
+
+/* animations */
+@keyframes appear {
+  0% {
+    opacity: 0;
+  }
+  25% {
+    transform: rotateY(-50deg);
+  }
+  100% {
+    opacity: 1;
+    transform: rotate(0)
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(10em);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
 }

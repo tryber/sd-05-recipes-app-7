@@ -39,16 +39,16 @@ const Foods = () => {
     <section>
       <Header title={'Comidas'} />
       <ExploreFoods />
-      {foods && foods.length === 1 ? (
-        <Redirect to={`/comidas/${foods[0].idMeal}`} />
-      ) : null}
-      {foods &&
-        foods.map((food, index) => {
-          if (index < 12) {
-            return <FoodCard food={food} index={index} />;
-          }
-          return null;
-        })}
+      {foods && foods.length === 1 ? <Redirect to={`/comidas/${foods[0].idMeal}`} /> : null}
+      <section className="recipe-container">
+        {foods &&
+          foods.map((food, index) => {
+            if (index < 12) {
+              return <FoodCard food={food} index={index} />;
+            }
+            return null;
+          })}
+      </section>
       {Alert(foods)}
       <Footer />
     </section>

@@ -1,9 +1,65 @@
+html {
+  font-size: 62.5%;
+}
+
 body {
   box-sizing: border-box;
   color: black;
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 16px;
   font-weight: 400;
-  line-height: 1.7;
+  line-height: 1.7rem;
   margin: 0;
+}
+
+.header {
+  align-items: center;
+  background-image: linear-gradient(to right bottom, rgb(240, 54, 8), rgb(251, 146, 60));
+  display: flex;
+  justify-content: space-around;
+  padding: 1rem;
+  position: static;
+}
+
+.btn {
+  background-image: linear-gradient(to right bottom, rgb(240, 54, 8), rgb(251, 146, 60));
+  color: white;
+  font-size: 2rem;
+  font-weight: 700;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  width: 15vw;
+}
+
+.btn-login {
+  animation: fadeIn 1s ease-in;
+}
+
+.footer {
+  background-image: linear-gradient(to right bottom, rgb(240, 54, 8), rgb(251, 146, 60));
+  bottom: 0;
+  display: flex;
+  justify-content: space-around;
+  left: 0;
+  padding: 1rem;
+  position: fixed;
+  width: 100vw;
+}
+
+.filter-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 2rem;
+}
+
+.btn-white {
+  background-image: linear-gradient(to bottom right, whitesmoke, white);
+  border-radius: 1rem;
+  color: black;
+  font-weight: 700;
+  padding: 1.5rem;
+  width: 15vw;
+}
+
+.btn-white:focus {
+  background-image: linear-gradient(to right bottom, rgb(240, 54, 8), rgb(251, 146, 60));
 }
