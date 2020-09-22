@@ -6,7 +6,7 @@ import profileIcon from '../../images/profileIcon.svg';
 function ProfileLink() {
   return (
     <Link to="/perfil">
-      <input type="image" src={profileIcon} alt="profile" data-testid="profile-top-btn" />
+      <input type="image" className="icon" src={profileIcon} alt="profile" data-testid="profile-top-btn" />
     </Link>
   );
 }

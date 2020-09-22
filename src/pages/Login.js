@@ -29,7 +29,7 @@ const Login = () => {
   return (
     <section className="login-container">
       <form className="login-input">
-        <h1>Login</h1>
+        <h1 className="login-header">Login</h1>
         <input
           className="login-input-email" type="email"
           placeholder="Email" data-testid="email-input"
@@ -42,7 +42,7 @@ const Login = () => {
         />
         <Link to="/comidas">
           <button
-            className="btn btn-orange" type="button"
+            className="btn btn-login" type="button"
             data-testid="login-submit-btn" disabled={loginButton}
             onClick={() => setLocalStorage(email)}
           >

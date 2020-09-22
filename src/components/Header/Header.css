@@ -1,3 +1,26 @@
-header {
-  position: static;
+.header-title {
+  color: white;
+  font-size: 4rem;
+}
+
+.header-search-container {
+  align-items: flex-end;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.header-search-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  text-align: center;
+}
+
+.btn-search {
+  align-self: inherit;
+  font-size: 1.2rem;
+  font-weight: 400;
+  padding: 1rem;
+  width: 10vw;
 }

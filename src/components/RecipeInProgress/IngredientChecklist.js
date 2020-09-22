@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import './style.css';
 
-function IngredientList(props) {
+function IngredientChecklist(props) {
   // https://medium.com/@vmarchesin/using-array-prototype-reduce-in-objects-using-javascript-dfcdae538fc8
   const filterChecklist = () =>
     Object.keys(props.singleItem)
@@ -32,29 +32,28 @@ function IngredientList(props) {
       {Object.entries(filterChecklist(props.singleItem)).map((key, index) => (
         key[1] === null ? (
           <div data-testid={`${index}-ingredient-step`}>
-            <input type="checkbox" id="ingredient" name="ingredients" value={key[0]} />
-            <label htmlFor="ingredient" className="line-through">
-              {key[0]}
-            </label>
+            <input
+              type="checkbox" id="ingredient"
+              name="ingredients" value={key[0]}
+            />
+            <label htmlFor="ingredient" className="line-through">{key[0]}</label>
           </div>
         ) : (
           <div data-testid={`${index}-ingredient-step`}>
             <input
-              type="checkbox"
-              id="ingredient"
-              name="ingredients"
-              value={`${key[0]} - ${key[1]}`}
+              type="checkbox" id="ingredient"
+              name="ingredients" value={`${key[0]} - ${key[1]}`}
             />
             <label htmlFor="ingredient" className="line-through">{`${key[0]} - ${key[1]}`}</label>
-          </div>
-        )),
+          </div>)
+        ),
       )}
     </form>
   );
 }
 
-export default IngredientList;
+export default IngredientChecklist;
 
-IngredientList.propTypes = {
+IngredientChecklist.propTypes = {
   singleItem: PropTypes.instanceOf(Object).isRequired,
 };

@@ -6,7 +6,7 @@ function SearchForm() {
   const { updateSearchText, updateSelectedFilter, searchText } = useContext(FoodContext);
 
   return (
-    <form>
+    <form className="header-search-form">
       <input
         type="text"
         placeholder="Buscar Receitas"
@@ -14,6 +14,7 @@ function SearchForm() {
         data-testid="search-input"
         value={searchText}
       />
+      <label htmlFor="ingredientes">Ingredientes</label>
       <input
         type="radio"
         name="pesquisar"
@@ -22,7 +23,7 @@ function SearchForm() {
         value="ingredient"
         onChange={(event) => updateSelectedFilter(event)}
       />
-      <label htmlFor="ingredientes">Ingredientes</label>
+      <label htmlFor="nome">Nome</label>
       <input
         type="radio"
         name="pesquisar"
@@ -31,7 +32,7 @@ function SearchForm() {
         value="name"
         onChange={(event) => updateSelectedFilter(event)}
       />
-      <label htmlFor="nome">Nome</label>
+      <label htmlFor="letra">Primeira Letra</label>
       <input
         type="radio"
         name="pesquisar"
@@ -40,7 +41,6 @@ function SearchForm() {
         value="firstLetter"
         onChange={(event) => updateSelectedFilter(event)}
       />
-      <label htmlFor="letra">Primeira Letra</label>
     </form>
   );
 }

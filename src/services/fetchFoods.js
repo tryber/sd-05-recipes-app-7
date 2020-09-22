@@ -6,6 +6,8 @@ export default function fetchFoods(text = '', type = '') {
     api = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${text}`;
   } else if (type === 'firstLetter') {
     api = `https://www.themealdb.com/api/json/v1/1/search.php?f=${text}`;
+  } else if (type === 'category') {
+    api = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${text}`;
   } else {
     api = `https://www.themealdb.com/api/json/v1/1/search.php?s=${text}`;
   }
@@ -30,8 +32,34 @@ export function fetchIngredient() {
 }
 
 export function filterIngredientFood(name) {
-  return fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${name}`)
+  return fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?s=${name}`)
     .then((response) => response.json())
-    .then((data) => data.meals[0])
+    .then((data) => data.meals[0]);
+}
+
+export function fetchByCategories(text, category) {
+  let api = '';
+  if (text === '' || text === 'All' || text === category) {
+    api = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
+  } else {
+    api = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${text}`;
+  }
+  return fetch(api)
+    .then((response) => response.json())
+    .then((cat) => cat.meals)
+    .catch((error) => console.error(error));
+}
+
+export function fetchLocales() {
+  return fetch('https://www.themealdb.com/api/json/v1/1/list.php?a=list')
+    .then((response) => response.json())
+    .then((data) => data.meals)
+    .catch((error) => console.error(error));
+}
+
+export function fetchFoodByLocales(local) {
+  return fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${local}`)
+    .then((response) => response.json())
+    .then((data) => data.meals)
     .catch((error) => console.error(error));
 }

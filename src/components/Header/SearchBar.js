@@ -20,9 +20,10 @@ function SearchBar() {
   const { requestDrinks } = useContext(DrinkContext);
 
   return (
-    <section>
+    <section className="header-search-container">
       <SearchForm />
       <button
+        className="btn btn-search"
         type="button"
         data-testid="exec-search-btn"
         onClick={() => {

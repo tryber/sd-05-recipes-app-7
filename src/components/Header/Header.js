@@ -9,13 +9,15 @@ import HeaderContext from '../../context/HeaderContext';
 const Header = (props) => {
   const { searchBarActive } = useContext(HeaderContext);
   return (
-    <header>
-      <ProfileLink />
-      <PageTitle title={props.title} />
-      <SearchIcon />
-      {/* https://stackoverflow.com/questions/24502898/show-or-hide-element-in-react/39401319 */}
+    <section>
+      <header className="header">
+        <ProfileLink />
+        <PageTitle title={props.title} />
+        <SearchIcon />
+        {/* https://stackoverflow.com/questions/24502898/show-or-hide-element-in-react/39401319 */}
+      </header>
       {searchBarActive ? <SearchBar /> : null}
-    </header>
+    </section>
   );
 };
 
